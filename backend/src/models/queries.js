@@ -27,14 +27,16 @@ export const getUsersEmail = async (email) => {
 };
 
 
+
 // POST
 export const postUser = async (name_user, email, password_user, id_role) => {
     const query = (`INSERT INTO users (name_user, email, password_user, id_role)
-                        VALUES ($1, $2, $3, $4,)`);
+                        VALUES ($1, $2, $3, $4)`);
     const values = [name_user, email, password_user, id_role]
     const result = await pool.query(query, values);
     return result.rows[0]
 };
+
 
 
 // PUT
