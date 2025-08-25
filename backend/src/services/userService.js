@@ -24,7 +24,7 @@ export const searchUserId = async (id_user) => {
     const existingUser = await getUsersId(id_user)
 
     if(!existingUser) {
-        throw new Error('Usuario no existe')
+        throw new Error('User does not exist')
     } 
     return existingUser
 };
@@ -32,38 +32,43 @@ export const searchUserId = async (id_user) => {
 
 export const searchUserEmail = async (email) => {
     if(!email || email.leght === 0) {
-        throw new Error('El email esta vacio')
+        throw new Error('The email is empty')
     }
 
     const existing = await getUsersEmail(email)
 
     if(!existing) {
-        throw new Error('El email no coinicide con ninguno')
+        throw new Error('The email does not match any')
     }
     return existing
 };
 
 
-export const createUser = async (name_user, email, password_user) => {
-    if(!name_user || !email || !password_user) {
-        throw new Error('Campos obligatorios')
+export const createUser = async (username, email, password) => {
+    if(!username || !email || !password) {
+        throw new Error('Required fields')
     }
 
+    const name_user = username
+    const password_user = password
     const defaultRole = 2;
+    
     const createId = await postUser(name_user, email, password_user, defaultRole)
 
     if(!createId) {
-        throw new Error('Error a registrar usuario')
+        throw new Error('ERROR DE NUEVO')
     }
     return createId
 };
 
 
-export const updateUser = async (name_user, email, password_user) => {
-    if(!name_user || !email || !password_user) {
+export const updateUser = async (username, email, password) => {
+    if(!username || !email || !password) {
         throw new Error('Campo obligatorios')
     }
 
+    const name_user = username
+    const password_user = password
     const updateId = await putUserid(name_user, email, password_user)
 
     if(!updateId) {
@@ -98,4 +103,5 @@ export const deleteByEmail = async (email) => {
     }
     return deleteEmail
 };
+
 
