@@ -6,23 +6,21 @@ import useRouter from './src/routes/routes.js'
 
 const app = express()
 
-
-// LEER ARCHIVO .JSON   
-const swaggerDocument = JSON.parse(fs.readFileSync('./src/swagger/swagger.json', 'utf-8'))
-
-// SWAGGER DOCS
-app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-
-
 // MIDDLEWARE
 app.use(cors());
 app.use(express.json())
 
 
+// LEER ARCHIVO .JSON   
+const swaggerDocument = JSON.parse(fs.readFileSync('./src/swagger/swagger.json', 'utf-8'))
+
+
+// SWAGGER DOCS
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 
 // MIS RUTAS
-app.use('/api/v1/', useRouter)
+app.use('/api/v1', useRouter)
 
 
 export default app;
