@@ -1,3 +1,5 @@
+CREATE DATABASE prueba_database
+
 DROP TABLE IF EXISTS charges;
 CREATE TABLE charge (
 	id_charge SERIAL PRIMARY KEY,
