@@ -14,10 +14,10 @@ export const showGetAllUser = async (req, res) => {
         const user = await searchAllUsers()
         res.status(200).json(user)
     } catch (error) {
-        console.error('Error en getAllUser:', error.message)
+        console.error('Error getting all users:', error.message)
 
         res.status(500).json({
-            message: 'error al obtener todos los usuarios',
+            message: 'Error getting all users',
             error: error.message
         })
     }
@@ -29,9 +29,9 @@ export const showGetUserId = async (req, res) => {
         const userId = await searchUserId(id_user)
         res.status(200).json(userId)
     } catch (error) {
-        console.error('Error en obtener usuario por id', error.message);
+        console.error('Error getting user by id', error.message);
         res.status(500).json({
-            message: 'Error obteniendo usuario',
+            message: 'Error getting user',
             error: error.message
         })
     }
@@ -44,10 +44,10 @@ export const showGetUserEmail = async (req, res) => {
         const userEmail = await searchUserEmail(email);
         res.status(200).json(userEmail)
     } catch (error) {
-        console.error('Error al obtener usuario por email:', error.message);
+        console.error('Error getting user by email:', error.message);
 
         res.status(500).json({
-            message: 'Error al obtener email',
+            message: 'Error getting email',
             error: error.message
         })
     }
@@ -57,17 +57,17 @@ export const showGetUserEmail = async (req, res) => {
 export const showCreateUser = async (req, res) => {
     try {
         const { 
-            name_user,
+            username,
             email,
-            password_user
+            password
         } = req.body
-        const create = await createUser(name_user, email, password_user)
+        const create = await createUser(username, email, password)
         res.status(201).json(create)
-    } catch (error) {
-        console.error('ERROR:', error.message);
 
+    } catch (error) {
+        console.error('Error creating user:', error.message);
         res.status(500).json({
-            message: 'Error al crear usuario',
+            message: 'Error creating user',
             error: error.message
         })
     }
@@ -77,17 +77,17 @@ export const showCreateUser = async (req, res) => {
 export const showUpdateUser = async (req, res) => {
     try {
         const { 
-            name_user,
+            username,
             email,
-            password_user
+            password
         } = req.body
-        const updateUserId = await updateUser(name_user, email, password_user)
+        const updateUserId = await updateUser(username, email, password)
         res.status(202).json(updateUserId)
     } catch (error) {
-        console.error('Error:', error.message);
+        console.error('Error updating user:', error.message);
         
         res.status(500).json({
-            message: 'Error al actualizar usuario',
+            message: 'Error updating user',
             error: error.message
         })
     }
@@ -97,13 +97,13 @@ export const showUpdateUser = async (req, res) => {
 export const showDeleteUserId = async (req, res) => {
     try {
         const id_user = req.params
-        const userId = await deleteUser(id)
+        const userId = await deleteUser(id_user)
         res.status(200).json(userId)
     } catch (error) {
-        console.error('Error: ', error.message);
+        console.error('Error deleting user by id: ', error.message);
         
         res.status(500).json({
-            message: 'Error al eliminar usuario por id',
+            message: 'Error deleting user by id',
             error: error.message
         })
     }
@@ -116,10 +116,10 @@ export const showDeleteUserEmail = async (req, res) => {
         const userEmail = await deleteByEmail(email)
         res.status(200).json(userEmail)
     } catch (error) {
-        console.error('Error: ', error.message);
+        console.error('Error deleting user by email: ', error.message);
         
         res.status(500).json({
-            message: 'Error al eliminar usuario por email',
+            message: 'Error deleting user by email',
             error: error.message
         })
     }
