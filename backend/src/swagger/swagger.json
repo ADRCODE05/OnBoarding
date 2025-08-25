@@ -12,9 +12,10 @@
         }
     ],
     "paths": {
-        "/users": {
+        "/api/v1/users": {
             "get": {
                 "summary": "get all users",
+                "tags": ["users"],
                 "responses": {
                     "200": {
                         "description": "list of users"
@@ -22,9 +23,10 @@
                 }
             }
         },
-        "/users:{id_user}": {
+        "/api/v1/users/{id_user}": {
             "get": {
                 "summary": "get user by id",
+                "tags": ["users"],
                 "parameters": [{
                     "name": "id_user",
                     "in": "path",
@@ -39,6 +41,161 @@
                     },
                     "404": {
                         "description": "user not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/users/email/{email}": {
+            "get": {
+                "summary":"get user by email",
+                "tags":["users"],
+                "parameters": [{
+                    "name": "email",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description":"user found by email"
+                    },
+                    "404": {
+                        "description": "email not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/users/create": {
+            "post": {
+                "summary": "create new user",
+                "tags": ["users"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "username",
+                                    "email",
+                                    "password"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "user created successfully"
+                    },
+                    "404": {
+                        "description": "error creating user"
+                    }
+                }
+            }
+        },
+        "/api/v1/users/update/{id_user}": {
+            "put": {
+                "summary": "update user by id",
+                "tags": ["users"],
+                "parameters": [{
+                    "name": "id_user",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "username",
+                                    "email",
+                                    "password"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "user updated successfully"
+                    },
+                    "404": {
+                        "description": "error updating user"
+                    }
+                }
+            }
+        },
+        "/api/v1/users/delete/{id_user}": {
+            "delete": {
+                "summary": "delete user by id",
+                "tags": ["users"],
+                "parameters": [{
+                    "name": "id_user",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                        
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "user successfully deleted by id"
+                    },
+                    "404": {
+                        "description": "Could not delete user by id"
+                    }
+                }
+            }
+        },
+        "/api/v1/users/delete/email/{email}": {
+            "delete": {
+                "summary": "delete user by email",
+                "tags": ["users"],
+                "parameters": [{
+                    "name": "email",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "User successfully deleted by email"
+                    },
+                    "404": {
+                        "description": "Could not delete user by email"
                     }
                 }
             }
