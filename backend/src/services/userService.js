@@ -6,7 +6,7 @@ import {
     putUserid,
     deleteUserId,
     deleteUserEmail
-} from "../models/queries.js";
+} from "../models/user_queries.js";
 
 
 
