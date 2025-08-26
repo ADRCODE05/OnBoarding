@@ -8,10 +8,10 @@ export const getUsers = async () => {
 };
 
 
-export const getUsersId = async (id_user) => {
+export const getUsersId = async (user_id) => {
     const query = (`SELECT * FROM users 
-                        WHERE id_user = $1`);
-    const values = [id_user]
+                        WHERE user_id = $1`);
+    const values = [user_id]
     const result = await pool.query(query, values)
     return result.rows[0]
 };
@@ -19,8 +19,7 @@ export const getUsersId = async (id_user) => {
 
 export const getUsersEmail = async (email) => {
     const query = (`SELECT * FROM users 
-                        WHERE email = $1
-                        RETURNIGN *`);
+                        WHERE email = $1`);
     const values = [email]
     const result = await pool.query(query, values)
     return result.rows[0]
@@ -29,10 +28,11 @@ export const getUsersEmail = async (email) => {
 
 
 // POST
-export const postUser = async (name_user, email, password_user, id_role) => {
-    const query = (`INSERT INTO users (name_user, email, password_user, id_role)
-                        VALUES ($1, $2, $3, $4)`);
-    const values = [name_user, email, password_user, id_role]
+export const postUser = async (username, email, password, role_id) => {
+    const query = (`INSERT INTO users (username, email, password, role_id)
+                        VALUES ($1, $2, $3, $4)
+                        RETURNING *`);
+    const values = [username, email, password, role_id]
     const result = await pool.query(query, values);
     return result.rows[0]
 };
@@ -40,12 +40,12 @@ export const postUser = async (name_user, email, password_user, id_role) => {
 
 
 // PUT
-export const putUserid = async (id_user, name_user, email, password_user) => {
+export const putUserid = async (user_id, username, email, password) => {
     const query = (`UPDATE users 
-                        SET name_user = $1, email = $2, password_user = $3
-                        WHERE id_user = $4
-                        RETURNIGN *`);
-    const values = [name_user, email, password_user, id_user]
+                        SET username = $1, email = $2, password = $3, updated_at = CURRENT_TIMESTAMP
+                        WHERE user_id = $4
+                        RETURNING *`);
+    const values = [username, email, password, user_id]
     const result = await pool.query(query, values)
     return result.rows[0];
 };
@@ -53,20 +53,20 @@ export const putUserid = async (id_user, name_user, email, password_user) => {
 
 
 // DELETE
-export const deleteUserId = async (id_user) => {
+export const deleteUserId = async (user_id) => {
     const query = (`DELETE FROM users 
-                        WHERE id_user = $1
-                        RETURNIGN *`);
-    const values = [id_user]
+                        WHERE user_id = $1
+                        RETURNING *`);
+    const values = [user_id]
     const result = await pool.query(query, values);
     return result.rows[0];
 };
 
 
 export const deleteUserEmail = async (email) => {
-    const query = format(`DELETE FROM users
+    const query = (`DELETE FROM users
                         WHERE email = $1
-                        RETURNIGN *`);
+                        RETURNING *`);
     const values = [email]
     const result = await pool.query(query, values)
     return result.rows[0];

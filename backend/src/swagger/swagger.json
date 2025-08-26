@@ -23,12 +23,12 @@
                 }
             }
         },
-        "/api/v1/users/{id_user}": {
+        "/api/v1/users/{user_id}": {
             "get": {
                 "summary": "get user by id",
                 "tags": ["users"],
                 "parameters": [{
-                    "name": "id_user",
+                    "name": "user_id",
                     "in": "path",
                     "required": true,
                     "schema": {
@@ -107,12 +107,12 @@
                 }
             }
         },
-        "/api/v1/users/update/{id_user}": {
+        "/api/v1/users/update/{user_id}": {
             "put": {
                 "summary": "update user by id",
                 "tags": ["users"],
                 "parameters": [{
-                    "name": "id_user",
+                    "name": "user_id",
                     "in": "path",
                     "required": true,
                     "schema": {
@@ -155,12 +155,12 @@
                 }
             }
         },
-        "/api/v1/users/delete/{id_user}": {
+        "/api/v1/users/delete/{user_id}": {
             "delete": {
                 "summary": "delete user by id",
                 "tags": ["users"],
                 "parameters": [{
-                    "name": "id_user",
+                    "name": "user_id",
                     "in": "path",
                     "required": true,
                     "schema": {

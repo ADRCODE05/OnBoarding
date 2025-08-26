@@ -1,3 +1,5 @@
+import bcrypt from 'bcrypt'
+
 import { 
     searchAllUsers,
     searchUserId,
@@ -25,8 +27,8 @@ export const showGetAllUser = async (req, res) => {
 
 export const showGetUserId = async (req, res) => {
     try {
-        const id_user = req.params
-        const userId = await searchUserId(id_user)
+        const { user_id } = req.params
+        const userId = await searchUserId(user_id)
         res.status(200).json(userId)
     } catch (error) {
         console.error('Error getting user by id', error.message);
@@ -40,7 +42,7 @@ export const showGetUserId = async (req, res) => {
 
 export const showGetUserEmail = async (req, res) => {
     try {
-        const email  = req.params
+        const { email } = req.params
         const userEmail = await searchUserEmail(email);
         res.status(200).json(userEmail)
     } catch (error) {
@@ -61,7 +63,8 @@ export const showCreateUser = async (req, res) => {
             email,
             password
         } = req.body
-        const create = await createUser(username, email, password)
+        const passwordHash = await bcrypt.hash(password, 10)
+        const create = await createUser(username, email, passwordHash)
         res.status(201).json(create)
 
     } catch (error) {
@@ -76,12 +79,14 @@ export const showCreateUser = async (req, res) => {
 
 export const showUpdateUser = async (req, res) => {
     try {
+        const { user_id } = req.params
         const { 
             username,
             email,
             password
         } = req.body
-        const updateUserId = await updateUser(username, email, password)
+        const passwordHash = await bcrypt.hash(password, 10)
+        const updateUserId = await updateUser(user_id, username, email, passwordHash)
         res.status(202).json(updateUserId)
     } catch (error) {
         console.error('Error updating user:', error.message);
@@ -96,8 +101,8 @@ export const showUpdateUser = async (req, res) => {
 
 export const showDeleteUserId = async (req, res) => {
     try {
-        const id_user = req.params
-        const userId = await deleteUser(id_user)
+        const { user_id } = req.params
+        const userId = await deleteUser(user_id)
         res.status(200).json(userId)
     } catch (error) {
         console.error('Error deleting user by id: ', error.message);
@@ -112,8 +117,12 @@ export const showDeleteUserId = async (req, res) => {
 
 export const showDeleteUserEmail = async (req, res) => {
     try {
-        const email = req.params
+        const { email } = req.params
+        console.log(email);
+        
         const userEmail = await deleteByEmail(email)
+        console.log(userEmail);
+        
         res.status(200).json(userEmail)
     } catch (error) {
         console.error('Error deleting user by email: ', error.message);

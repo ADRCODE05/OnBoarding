@@ -1,3 +1,6 @@
+import bcrypt from 'bcrypt';
+import { crearToken } from '../utils/jwt.js';
+
 import { 
     getUsers, 
     getUsersId, 
@@ -10,18 +13,37 @@ import {
 
 
 
+export const loginUser = async (email, password) => {
+    const user = await getUsersEmail(email)
+    if(!user) {
+        throw new Error('Email no existe')
+    }
+
+    const validate = await bcrypt.compare(password, user.password)
+    if(!validate) {
+        throw new Error('Credenciales invalidas')
+    }
+    const token = crearToken({
+        email: user.email
+    })
+    return token
+}
+
+
+
 export const searchAllUsers = async () => {
     const existing = await getUsers();
     return existing
 };
 
 
-export const searchUserId = async (id_user) => {
-    if(!id_user || isNaN(id_user)) {
+
+export const searchUserId = async (user_id) => {
+    if(!user_id || isNaN(user_id)) {
         throw new Error('El ID debe ser un numero valido')
     }
     
-    const existingUser = await getUsersId(id_user)
+    const existingUser = await getUsersId(user_id)
 
     if(!existingUser) {
         throw new Error('User does not exist')
@@ -31,12 +53,12 @@ export const searchUserId = async (id_user) => {
 
 
 export const searchUserEmail = async (email) => {
-    if(!email || email.leght === 0) {
+    if(!email) {
         throw new Error('The email is empty')
     }
-
+    
     const existing = await getUsersEmail(email)
-
+    
     if(!existing) {
         throw new Error('The email does not match any')
     }
@@ -49,27 +71,26 @@ export const createUser = async (username, email, password) => {
         throw new Error('Required fields')
     }
 
-    const name_user = username
-    const password_user = password
     const defaultRole = 2;
     
-    const createId = await postUser(name_user, email, password_user, defaultRole)
-
-    if(!createId) {
+    const newUser = await postUser(username, email, password, defaultRole)
+    
+    if(!newUser || !newUser.user_id) {
         throw new Error('ERROR DE NUEVO')
     }
-    return createId
+    return newUser
 };
 
 
-export const updateUser = async (username, email, password) => {
-    if(!username || !email || !password) {
+export const updateUser = async (user_id ,username, email, password) => {
+    if(!user_id||!username || !email || !password) {
         throw new Error('Campo obligatorios')
-    }
+    } 
 
-    const name_user = username
-    const password_user = password
-    const updateId = await putUserid(name_user, email, password_user)
+    if(isNaN(user_id)) {
+        throw new Error('El id del usuario tiene que ser un numero valido')
+    }
+    const updateId = await putUserid(user_id, username, email, password)
 
     if(!updateId) {
         throw new Error('Usuario no existe');
@@ -78,12 +99,12 @@ export const updateUser = async (username, email, password) => {
 };
 
 
-export const deleteUser = async (id_user) => {
-    if(!id_user || isNaN(id_user)) {
+export const deleteUser = async (user_id) => {
+    if(!user_id || isNaN(user_id)) {
         throw new Error('El di tiene que ser un numero valido')
     }
 
-    const deleteId = await deleteUserId(id_user)
+    const deleteId = await deleteUserId(user_id)
 
     if(!deleteId) {
         throw new Error('Usuario no encontrado')
