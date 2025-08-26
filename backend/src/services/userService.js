@@ -8,15 +8,16 @@ import {
     postUser,
     putUserid,
     deleteUserId,
-    deleteUserEmail
-} from "../models/user_queries.js";
+    deleteUserEmail,
+    confirmUser
+} from "../models/userQueries.js";
 
 
 
 export const loginUser = async (email, password) => {
-    const user = await getUsersEmail(email)
+    const user = await confirmUser(email, password)
     if(!user) {
-        throw new Error('Email no existe')
+        throw new Error('Email o contraseña incorrectas')
     }
 
     const validate = await bcrypt.compare(password, user.password)
@@ -24,7 +25,9 @@ export const loginUser = async (email, password) => {
         throw new Error('Credenciales invalidas')
     }
     const token = crearToken({
-        email: user.email
+        user_id: user.user_id,
+        email: user.email,
+        id_role: user.id_role
     })
     return token
 }

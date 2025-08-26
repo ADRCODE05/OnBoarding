@@ -4,7 +4,7 @@ import {
         getEmployeeById,
         postEmployess,
         putEmployeesById
-    } from "../models/employee_queries.js";
+    } from "../models/employeeQueries.js";
 
 
 

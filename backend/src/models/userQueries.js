@@ -1,6 +1,6 @@
 import { pool } from '../../db/db.js'
 
-// Users
+
 // GET
 export const getUsers = async () => {
     const result = await pool.query(`SELECT * FROM users`)
@@ -73,6 +73,14 @@ export const deleteUserEmail = async (email) => {
 };
 
 
+
+export const confirmUser = async (email, password) => {
+    const query = (`SELECT * FROM users WHERE email = $1 AND password = $2`)
+    const values = [email, password]
+    const result = await pool.query(query, values)
+    return result.rows[0]
+
+}
 
 
 

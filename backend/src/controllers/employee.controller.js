@@ -3,7 +3,7 @@ import {
     searchEmployeeById,
     newEmployee,
     deleteEmployee
-} from "../services/employees.js";
+} from "../services/employeesService.js";
 
 
 export const viewsAllEmployee = async (req, res) => {

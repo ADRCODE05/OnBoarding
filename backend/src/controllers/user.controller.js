@@ -63,6 +63,7 @@ export const showCreateUser = async (req, res) => {
             email,
             password
         } = req.body
+        
         const passwordHash = await bcrypt.hash(password, 10)
         const create = await createUser(username, email, passwordHash)
         res.status(201).json(create)
