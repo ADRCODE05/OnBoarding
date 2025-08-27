@@ -15,21 +15,17 @@ import {
 
 
 export const loginUser = async (email, password) => {
-    const user = await confirmUser(email, password)
+    const user = await getUsersEmail(email)
     if(!user) {
-        throw new Error('Email o contraseña incorrectas')
+        throw new Error('Usuario no encontrado')
     }
 
     const validate = await bcrypt.compare(password, user.password)
     if(!validate) {
         throw new Error('Credenciales invalidas')
     }
-    const token = crearToken({
-        user_id: user.user_id,
-        email: user.email,
-        id_role: user.id_role
-    })
-    return token
+    const token = await crearToken(user.email)
+    return  { token, user }
 }
 
 

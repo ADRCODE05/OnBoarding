@@ -1,4 +1,4 @@
-import { pool } from "../../db/db";
+import { pool } from "../../db/db.js";
 
 // GET 
 export const getCourse = async () => {
@@ -18,6 +18,7 @@ export const getCourseByTitle = async (title) => {
     const query = `SELECT * FROM courses WHERE title = $1;`
     const values = [title]
     const result = await pool.query(query, values)
+    return result.rows[0]
 }
 
 // POST
@@ -34,7 +35,7 @@ export const postCourse = async (title, description, duration, state_id, type_id
 // PUT 
 export const putCourse = async (title, description, duration, state_id, type_id, id_course) => {
     const query = `UPDATE course 
-                SET title = $1, description = $2, duration = $3, state_id = $4, type_id = $5
+                SET title = $1, description = $2, duration = $3, state_id = $4, type_id = $5, updated_at = CURRENT_ TIMESTAMP
                 WHERE id_course = $6
                 RETURNING *`
     const values = [title, description, duration, state_id, type_id, id_course]

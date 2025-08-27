@@ -29,7 +29,7 @@ export const postEmployess = async (full_name, identification_number, phone, cha
 // PUT
 export const putEmployeesById = async (full_name, identification_number, phone, charge_id, company_id) => {
     const query = `UPDATE employees 
-                SET full_name = $1, identification_number = $2, phone = $3, charge_id = $4, company_id = $5;`;
+                SET full_name = $1, identification_number = $2, phone = $3, charge_id = $4, company_id = $5, updated_at = CURRENT_TIMESTAMP;`;
     const values = [full_name, identification_number, phone, charge_id, company_id, user_id]
     const result = await pool.query(query, values)
     return result.rows[0]

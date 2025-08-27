@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import { authMiddleware, authRol } from "../middleware/authMiddleware.js";
 
+// Users
 import { 
     showGetAllUser,
     showGetUserId,
@@ -9,9 +10,11 @@ import {
     showCreateUser,
     showUpdateUser,
     showDeleteUserId,
-    showDeleteUserEmail
+    showDeleteUserEmail,
+    login
 } from "../controllers/user.controller.js";
 
+// Employees
 import { 
         viewsAllEmployee, 
         viewsDeleteEmployees, 
@@ -20,13 +23,36 @@ import {
 } from "../controllers/employee.controller.js";
 
 
-import { controllerGetAllCourse, controllerGetAllCourseById, controllerGetAllCourseByTitle, controllerPostCourse, controllerPutCourse, controllerRemoveCourse } from "../controllers/course.controller.js";
+// Courses
+import { 
+        controllerGetAllCourse, 
+        controllerGetAllCourseById, 
+        controllerGetAllCourseByTitle, 
+        controllerPostCourse, 
+        controllerPutCourse, 
+        controllerRemoveCourse } from "../controllers/course.controller.js";
+
+
+import { 
+        coursePersonalizedAllGET, 
+        coursePersonalizedByIdGET,
+        coursePersonalizedByTitleGET,
+        coursePersonalizedNew,
+        coursePersonalizedRemoveByIdDELETE,
+        coursePersonalizedRemoveByTitleDELETE,
+        coursePersonalizedUpdatePUT
+} from "../controllers/pCourse.controller.js";
+
 
 
 // endpoint route
 const router = Router()
 
 export const httpCat = (statusCode) => `https://http.cat/${statusCode}`
+
+
+router.post('/login', login)
+
 
 
 // brings all users
@@ -70,7 +96,28 @@ router.post('/course/create', controllerPostCourse)
 
 router.put('/course/update', controllerPutCourse)
 
-router.delete('/course/delete/:id_course', controllerRemoveCourse)
+router.delete('/course/delete/:id_course', controllerRemoveCourse);
+
+
+
+// ruta de curso personalizados
+router.get('/course/personalized', coursePersonalizedAllGET)
+
+router.get('/course/personalized/:id', coursePersonalizedByIdGET)
+
+router.get('/course/personalized', coursePersonalizedByTitleGET)
+
+router.post('/course/personalized/new', coursePersonalizedNew)
+
+router.put('/course/personalized/update/:id', coursePersonalizedUpdatePUT)
+
+router.delete('/course/personalized/delete/:id', coursePersonalizedRemoveByIdDELETE)
+
+router.delete('/course/personalized/delete', coursePersonalizedRemoveByTitleDELETE)
+
+
+
+// rutas de registro de curso 
 
 
 
@@ -82,11 +129,8 @@ router.delete('/course/delete/:id_course', controllerRemoveCourse)
 
 
 
-
-
-
 router.use((req, res) => {
-    console.log('Error not found 404');
+    console.error('Error not found 404');
     res.redirect(httpCat(404))
 });
 

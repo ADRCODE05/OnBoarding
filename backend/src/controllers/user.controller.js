@@ -7,8 +7,34 @@ import {
     createUser,
     updateUser,
     deleteUser,
-    deleteByEmail
+    deleteByEmail,
+    loginUser
 } from "../services/userService.js";
+
+export const login = async (req, res) => {
+    try {
+        const { 
+            email,
+            password
+        } = req.body
+        const { token, user } = await loginUser(email, password)
+        res.status(200).json({
+            message: 'Login exitoso', token,
+            user: {
+                id: user.user_id,
+                email: user.email,
+                role: user.role_id
+            }
+        })
+    } catch (error) {
+        console.error('Error al logiarse:', error.message);
+        res.status(401).json({
+            message: 'No se puedo autorizar el inicio de sesion, vuelva a intentarlo mas tarde....',
+            error: error.message
+        })
+        
+    }
+}
 
 
 export const showGetAllUser = async (req, res) => {
@@ -119,10 +145,8 @@ export const showDeleteUserId = async (req, res) => {
 export const showDeleteUserEmail = async (req, res) => {
     try {
         const { email } = req.params
-        console.log(email);
         
         const userEmail = await deleteByEmail(email)
-        console.log(userEmail);
         
         res.status(200).json(userEmail)
     } catch (error) {

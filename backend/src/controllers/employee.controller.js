@@ -11,7 +11,7 @@ export const viewsAllEmployee = async (req, res) => {
         const employee = await allEmployee()
         res.status(200).json(employee)
     } catch (error) {
-        console.log('Error:', error.message);
+        console.error('Error:', error.message);
         
         res.status(404).json({
             message: 'Error al obtener empleados',
@@ -27,7 +27,7 @@ export const viewsEmployeeById = async (req, res) => {
         const employeeId = await searchEmployeeById(id)
         res.status(200).json(employeeId)
     } catch (error) {
-        console.log('Error: ', error.message);
+        console.error('Error: ', error.message);
         
         res.status(404).json({
             message: 'Error al obtener empleado por id',
@@ -51,7 +51,7 @@ export const viewsNewEmployee = async (req, res) => {
         const employeeNew = await newEmployee(full_name, identification_number, phone, charge_id, company_id, user_id);
         res.status(201).json(employeeNew);
     } catch (error) {
-        console.log('ERROR: ', error.message);
+        console.error('ERROR: ', error.message);
         res.status(404).json({
             message: 'Error al crear nuevo empleado',
             error: error.message
@@ -67,7 +67,7 @@ export const viewsDeleteEmployees = async (req, res) => {
         const doAwayEmployee = await deleteEmployee(id) 
         res.status(200).json(doAwayEmployee);
     } catch (error) {
-        console.log('Error: ', error.message);
+        console.error('Error: ', error.message);
         res.status(404).json({
             message: 'Error al eliminar empleado',
             error: error.message

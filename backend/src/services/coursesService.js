@@ -3,8 +3,9 @@ import {
     getCourseById,
     postCourse,
     deleteCourse,
-    getCourseByTitle
-} from "../models/coursesQueries";
+    getCourseByTitle,
+    putCourse
+} from "../models/coursesQueries.js";
 
 
 
@@ -61,6 +62,20 @@ export const servicePostCourse = async (title, description, duration, state_id, 
     return data
 };
 
+
+export const servicePutCourse = async (title, description, duration, state_id, type_id, id_course) => {
+    if(!title || !description || !duration || !state_id || !type_id || !id_course) {
+        throw new Error('Campos obligatorios')
+    }
+
+    const data = await putCourse(title, description, duration, state_id, type_id, id_course);
+    
+    if(!data) {
+        throw new Error('Error al actualizar curso')
+    }
+    
+    return data
+}
 
 
 export const serviceDeleteCourse = async (id_course) => {

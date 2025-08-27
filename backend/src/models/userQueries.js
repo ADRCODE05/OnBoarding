@@ -40,7 +40,7 @@ export const postUser = async (username, email, password, role_id) => {
 
 
 // PUT
-export const putUserid = async (user_id, username, email, password) => {
+export const putUserid = async (username, email, password, user_id) => {
     const query = (`UPDATE users 
                         SET username = $1, email = $2, password = $3, updated_at = CURRENT_TIMESTAMP
                         WHERE user_id = $4
