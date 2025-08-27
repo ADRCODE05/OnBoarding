@@ -199,7 +199,526 @@
                     }
                 }
             }
+        },
+        "/api/v1/employees": {
+            "get": {
+                "summary": "search all employees",
+                "tags": ["employees"],
+                "responses": {
+                    "200": {
+                        "description": "Showing successful employee"
+                    },
+                    "404": {
+                        "description": "error displaying all employees"
+                    }
+                }
+            }
+        },
+        "/api/v1/employees/{id}": {
+            "get": {
+                "summary": "looking for employee by id",
+                "tags": ["employees"],
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful in finding an employee by ID"
+                    },
+                    "404": {
+                        "description":"no job found by id"
+                    }
+                }
+            }
+        },
+        "/api/v1/employees/new/employee": {
+            "post": {
+                "summary": "add a new employee",
+                "tags": ["employees"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "full_name": {
+                                        "type": "string"
+                                    },
+                                    "identification_number": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "charge_id": {
+                                        "type": "integer"
+                                    },
+                                    "company_id": {
+                                        "type": "integer"
+                                    },
+                                    "user_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "full_name",
+                                    "identification_number",
+                                    "phone",
+                                    "charge_id",
+                                    "company_id",
+                                    "user_id"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "create successful employees"
+                    },
+                    "404": {
+                        "description": "create successful employees"
+                    }
+                }
+            }
+        },
+        "/api/v1/employees/remove/employee/{id}": {
+            "delete": {
+                "summary": "delete user by id",
+                "tags": ["employees"],
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "employee successfully deleted"
+                    },
+                    "404": {
+                        "description": "Error deleting employee by ID"
+                    }
+                }
+            }
+        },
+        "/api/v1/course": {
+            "get": {
+                "summary": "search all courses",
+                "tags": ["courses"],
+                "responses": {
+                    "200": {
+                        "description": "success in obtaining all the courses"
+                    },
+                    "404": {
+                        "description": "Error getting the courses"
+                    }
+                }
+            }
+        },
+        "/api/v1/course/{id_course}": {
+            "get": {
+                "summary": "search course by id",
+                "tags": ["courses"],
+                "parameters": [{
+                    "name": "id_course",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Get course by ID with success"
+                    },
+                    "404": {
+                        "description": "the course does not exist."
+                    }
+                }
+            }
+        },
+        "/api/v1/course/{title}": {
+            "get": {
+                "summary": "search for courses by title",
+                "tags": ["courses"],
+                "parameters": [{
+                    "name": "title",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successful course search by title"
+                    },
+                    "404": {
+                        "description": "Error searching for a course by title"
+                    }
+                }
+            }
+        },
+        "/api/v1/course/create": {
+            "post": {
+                "summary": "create new course",
+                "tags": ["courses"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "duration": {
+                                        "type": "string"
+                                    },
+                                    "state_id": {
+                                        "type": "integer"
+                                    },
+                                    "type_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "duration",
+                                    "state_id",
+                                    "type_id"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "create a course successfully"
+                    },
+                    "404": {
+                        "description": "error creating course"
+                    }
+                }
+            }
+        },
+        "/api/v1/course/update/{id_course}": {
+            "put": {
+                "summary": "edit course by id",
+                "tags": ["courses"],
+                "parameters": [{
+                    "name": "id_course",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "duration": {
+                                        "type": "string"
+                                    },
+                                    "state_id": {
+                                        "type": "integer"
+                                    },
+                                    "type_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "duration",
+                                    "state_id",
+                                    "type_id"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Update course by ID successfully"
+                    },
+                    "404": {
+                        "description": "Error updating course by ID"
+                    }
+                }
+            }
+        },
+        "/api/v1/course/delete/{id_course}": {
+            "delete": {
+                "summary": "delete course by id",
+                "tags": ["courses"],
+                "parameters": [{
+                    "name": "id_course",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "delete course correctly"
+                    },
+                    "404": {
+                        "description": "Could not delete course by id"
+                    }
+                }
+            }
+        },
+        "/api/v1/course/personalized": {
+            "get": {
+                "summary": "search all custom courses",
+                "tags": ["courses personalized"],
+                "responses": {
+                    "200": {
+                        "description": "success in bringing all personalized courses"
+                    },
+                    "404": {
+                        "description": "Error fetching all custom courses"
+                    }
+                }
+            }
+        },
+        "/api/v1/course/personalized/{id}": {
+            "get": {
+                "summary": "Search custom course by id",
+                "tags": ["courses personalized"],
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successfully found custom course by Id"
+                    },
+                    "404": {
+                        "description": "Error getting custom course by id"
+                    }
+                }
+            }
+        },
+        "/api/v1/course/personalized/title": {
+            "get": {
+                "summary": "search for a custom course by title",
+                "tags": ["courses personalized"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "email"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success in finding personalized course by title"
+                    },
+                    "404": {
+                        "description": "Error finding custom course by title"
+                    }
+                }
+            }
+        },
+        "/api/v1/course/personalized/new": {
+            "post": {
+                "summary": "create a new custom course",
+                "tags": ["courses personalized"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json":{
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "duration": {
+                                        "type": "string"
+                                    },
+                                    "company_id": {
+                                        "type": "integer"
+                                    },
+                                    "state_id": {
+                                        "type": "integer"
+                                    },
+                                    "type_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "duration",
+                                    "company_id",
+                                    "state_id",
+                                    "type_id"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "custom course created successfully"
+                    },
+                    "404": {
+                        "description": "error creating a custom course"
+                    }
+                }
+            }
+        },
+        "/api/v1/course/personalized/update/{coursep_id}": {
+            "get": {
+                "summary": "update course by id",
+                "tags": ["courses personalized"],
+                "parameters": [{
+                    "name": "coursep_id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "duration": {
+                                        "type": "string"
+                                    },
+                                    "company_id": {
+                                        "type": "integer"
+                                    },
+                                    "state_id": {
+                                        "type": "integer"
+                                    },
+                                    "type_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "duration",
+                                    "company_id",
+                                    "state_id",
+                                    "type_id"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "custom course updated successfully"
+                    },
+                    "404": {
+                        "description": "The personalized course could not be personalized"
+                    }
+                }
+            }
+        },
+        "/api/v1/course/personalized/delete/:coursep_id": {
+            "delete": {
+                "summary": "delete custom course by id",
+                "tags": ["courses personalized"],
+                "parameters": [{
+                    "name": "corursep_id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "delete custom course"
+                    },
+                    "404": {
+                        "description": "error deleting custom course"
+                    }
+                }
+            }
+        },
+        "/api/v1/course/personalized/delete": {
+            "delete": {
+                "summary": "delete custom course by title",
+                "tags": ["courses personalized"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "title"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
         }
-        
     }
 }

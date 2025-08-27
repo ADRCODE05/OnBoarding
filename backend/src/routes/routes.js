@@ -4,14 +4,14 @@ import { authMiddleware, authRol } from "../middleware/authMiddleware.js";
 
 // Users
 import { 
-    showGetAllUser,
-    showGetUserId,
-    showGetUserEmail,
-    showCreateUser,
-    showUpdateUser,
-    showDeleteUserId,
-    showDeleteUserEmail,
-    login
+        showGetAllUser,
+        showGetUserId,
+        showGetUserEmail,
+        showCreateUser,
+        showUpdateUser,
+        showDeleteUserId,
+        showDeleteUserEmail,
+        login
 } from "../controllers/user.controller.js";
 
 // Employees
@@ -78,9 +78,9 @@ router.get('/employees', viewsAllEmployee)
 
 router.get('/employees/:id', viewsEmployeeById)
 
-router.post('/employees/new/employees', viewsNewEmployee)
+router.post('/employees/new/employee', viewsNewEmployee)
 
-router.delete('/employees/remove/employees', viewsDeleteEmployees)
+router.delete('/employees/remove/employee/:id', viewsDeleteEmployees)
 
 
 
@@ -94,7 +94,7 @@ router.get('/course/:title', controllerGetAllCourseByTitle)
 
 router.post('/course/create', controllerPostCourse)
 
-router.put('/course/update', controllerPutCourse)
+router.put('/course/update/:id_course', controllerPutCourse)
 
 router.delete('/course/delete/:id_course', controllerRemoveCourse);
 
@@ -103,15 +103,15 @@ router.delete('/course/delete/:id_course', controllerRemoveCourse);
 // ruta de curso personalizados
 router.get('/course/personalized', coursePersonalizedAllGET)
 
-router.get('/course/personalized/:id', coursePersonalizedByIdGET)
+router.get('/course/personalized/:coursep_id', coursePersonalizedByIdGET)
 
-router.get('/course/personalized', coursePersonalizedByTitleGET)
+router.get('/course/personalized/email', coursePersonalizedByTitleGET)
 
 router.post('/course/personalized/new', coursePersonalizedNew)
 
-router.put('/course/personalized/update/:id', coursePersonalizedUpdatePUT)
+router.put('/course/personalized/update/:coursep_id', coursePersonalizedUpdatePUT)
 
-router.delete('/course/personalized/delete/:id', coursePersonalizedRemoveByIdDELETE)
+router.delete('/course/personalized/delete/:coursep_id', coursePersonalizedRemoveByIdDELETE)
 
 router.delete('/course/personalized/delete', coursePersonalizedRemoveByTitleDELETE)
 
@@ -130,8 +130,8 @@ router.delete('/course/personalized/delete', coursePersonalizedRemoveByTitleDELE
 
 
 router.use((req, res) => {
-    console.error('Error not found 404');
-    res.redirect(httpCat(404))
+        console.error('Error not found 404');
+        res.redirect(httpCat(404))
 });
 
 
