@@ -324,12 +324,12 @@
                 }
             }
         },
-        "/api/v1/course/{id_course}": {
+        "/api/v1/course/{course_id}": {
             "get": {
                 "summary": "search course by id",
                 "tags": ["courses"],
                 "parameters": [{
-                    "name": "id_course",
+                    "name": "course_id",
                     "in": "path",
                     "required": true,
                     "schema": {
@@ -416,12 +416,12 @@
                 }
             }
         },
-        "/api/v1/course/update/{id_course}": {
+        "/api/v1/course/update/{course_id}": {
             "put": {
                 "summary": "edit course by id",
                 "tags": ["courses"],
                 "parameters": [{
-                    "name": "id_course",
+                    "name": "course_id",
                     "in": "path",
                     "required": true,
                     "schema": {
@@ -472,12 +472,12 @@
                 }
             }
         },
-        "/api/v1/course/delete/{id_course}": {
+        "/api/v1/course/delete/{course_id}": {
             "delete": {
                 "summary": "delete course by id",
                 "tags": ["courses"],
                 "parameters": [{
-                    "name": "id_course",
+                    "name": "course_id",
                     "in": "path",
                     "required": true,
                     "schema": {

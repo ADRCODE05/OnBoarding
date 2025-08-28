@@ -18,8 +18,11 @@ import {
 import { 
         viewsAllEmployee, 
         viewsDeleteEmployees, 
+        viewsDeleteEmployeesByIdentification, 
         viewsEmployeeById, 
-        viewsNewEmployee 
+        viewsNewEmployee, 
+        viewsPutEmployeesById,
+        viewsPutEmployeesByIdentification
 } from "../controllers/employee.controller.js";
 
 
@@ -30,7 +33,8 @@ import {
         controllerGetAllCourseByTitle, 
         controllerPostCourse, 
         controllerPutCourse, 
-        controllerRemoveCourse } from "../controllers/course.controller.js";
+        controllerRemoveCourse, 
+        courseTitleDELETE} from "../controllers/course.controller.js";
 
 
 import { 
@@ -66,6 +70,10 @@ router.post('/users/create', showCreateUser)
 
 router.put('/users/update/:user_id', showUpdateUser)
 
+
+// agregar a swagger
+router.put('/user/update/:email', showDeleteUserEmail)
+
 router.delete('/users/delete/:user_id', showDeleteUserId)
 
 router.delete('/users/delete/email/:email', showDeleteUserEmail)
@@ -78,9 +86,18 @@ router.get('/employees', viewsAllEmployee)
 
 router.get('/employees/:id', viewsEmployeeById)
 
+router.get('/employees/:identification_number', viewsDeleteEmployeesByIdentification)
+
 router.post('/employees/new/employee', viewsNewEmployee)
 
+router.put('/employees/update/:id', viewsPutEmployeesById)
+
+router.put('/employees/update/:identification_number', viewsPutEmployeesByIdentification)
+
 router.delete('/employees/remove/employee/:id', viewsDeleteEmployees)
+
+router.delete('/employees/remove/employee/:identification_number', viewsDeleteEmployeesByIdentification)
+
 
 
 
@@ -88,15 +105,17 @@ router.delete('/employees/remove/employee/:id', viewsDeleteEmployees)
 // rutas de curso
 router.get('/course', controllerGetAllCourse)
 
-router.get('/course/:id_course', controllerGetAllCourseById)
+router.get('/course/:course_id', controllerGetAllCourseById)
 
 router.get('/course/:title', controllerGetAllCourseByTitle)
 
 router.post('/course/create', controllerPostCourse)
 
-router.put('/course/update/:id_course', controllerPutCourse)
+router.put('/course/update/:course_id', controllerPutCourse)
 
-router.delete('/course/delete/:id_course', controllerRemoveCourse);
+router.delete('/course/delete/:course_id', controllerRemoveCourse);
+
+router.delete('/course/delete/:title', courseTitleDELETE)
 
 
 

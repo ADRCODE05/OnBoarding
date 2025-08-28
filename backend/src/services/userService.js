@@ -9,7 +9,8 @@ import {
     putUserid,
     deleteUserId,
     deleteUserEmail,
-    confirmUser
+    confirmUser,
+    putUserEmail
 } from "../models/userQueries.js";
 
 
@@ -81,7 +82,7 @@ export const createUser = async (username, email, password) => {
 };
 
 
-export const updateUser = async (user_id ,username, email, password) => {
+export const updateUser = async (username, email, password, user_id) => {
     if(!user_id||!username || !email || !password) {
         throw new Error('Campo obligatorios')
     } 
@@ -98,6 +99,22 @@ export const updateUser = async (user_id ,username, email, password) => {
 };
 
 
+export const updateUserEmail = async (username, newEmail, password, email) => {
+    if(!username || !newEmail || !password || !email) {
+        throw new Error('Campo obligatorios')
+    }
+
+
+    const data = await putUserEmail(username, newEmail, password, email)
+
+    if(!data) {
+        throw new Error('usuario no existe');
+    }
+
+    return data
+}
+
+
 export const deleteUser = async (user_id) => {
     if(!user_id || isNaN(user_id)) {
         throw new Error('El di tiene que ser un numero valido')
@@ -110,6 +127,7 @@ export const deleteUser = async (user_id) => {
     }
     return deleteId
 };
+
 
 export const deleteByEmail = async (email) => {
     if(!email) {

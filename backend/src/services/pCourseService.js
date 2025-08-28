@@ -94,7 +94,7 @@ export const personalizedRemoveByIdDELETE = async (coursep_id) => {
         throw new Error('El campo es obligatorio')
     }
 
-    if(isNaN(coursep_id)) {
+    if(Number.isInteger(Number(coursep_id))) {
         throw new Error('El dato ingresado tiene que ser un numero valido')
     }
 

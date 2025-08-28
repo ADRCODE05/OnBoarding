@@ -2,7 +2,9 @@ import {
     allEmployee,
     searchEmployeeById,
     newEmployee,
-    deleteEmployee
+    deleteEmployee,
+    searchEmployeeByidentification,
+    employeeByIdPUT
 } from "../services/employeesService.js";
 
 
@@ -38,6 +40,21 @@ export const viewsEmployeeById = async (req, res) => {
 };
 
 
+export const viewsEmployeeByIdentification = async (req, res) => {
+    try {
+        const { identification_number } = req.params
+        const data = await searchEmployeeByidentification(identification_number)
+        res.status(200).json(data)
+    } catch (error) {
+        console.error('Error al obtener empleado con la identificacion', error.message)
+        res.status(404).json({
+            message: 'No se encontro el empleado con esa identificacion',
+            error: error.message
+        })
+    }
+}
+
+
 export const viewsNewEmployee = async (req, res) => {
     try {
         const { 
@@ -61,10 +78,72 @@ export const viewsNewEmployee = async (req, res) => {
 };
 
 
+export const viewsPutEmployeesById = async (req, res) => {
+    try {
+        const { id } = req.params
+        const { 
+            full_name,
+            identification_number,
+            phone,
+            charge_id,
+            company_id,
+            user_id
+        } = req.body
+        const data = await employeeByIdPUT(full_name, identification_number, phone, charge_id, company_id, user_id, id)
+        res.status(200).json(data)
+    } catch (error) {
+        console.error('error al actualizar empleado', error.message);
+        res.status(404).json({
+            message: 'No se pudo actualizar el cliente',
+            error: error.message
+        })
+    }
+}
+
+
+export const viewsPutEmployeesByIdentification = async (req, res) => {
+    try {
+        const { identification_number } = req.params
+        const { 
+            full_name,
+            newIdentification,
+            phone,
+            charge_id,
+            company_id,
+            user_id
+        } = req.body
+        const data = await employeeByIdPUT(full_name, newIdentification, phone, charge_id, company_id, user_id, identification_number)
+        res.status(200).json(data)
+    } catch (error) {
+        console.error('error al actualizar empleado', error.message);
+        res.status(404).json({
+            message: 'No se pudo actualizar el cliente',
+            error: error.message
+        })
+    }
+}
+
+
 export const viewsDeleteEmployees = async (req, res) => {
     try {
         const { id } = req.params
         const doAwayEmployee = await deleteEmployee(id) 
+        res.status(200).json(doAwayEmployee);
+    } catch (error) {
+        console.error('Error: ', error.message);
+        res.status(404).json({
+            message: 'Error al eliminar empleado',
+            error: error.message
+        })
+        
+        
+    }
+}
+
+export const viewsDeleteEmployeesByIdentification = async (req, res) => {
+    try {
+        const { identification_number } = req.params
+        const doAwayEmployee = await deleteEmployee(identification_number) 
         res.status(200).json(doAwayEmployee);
     } catch (error) {
         console.error('Error: ', error.message);

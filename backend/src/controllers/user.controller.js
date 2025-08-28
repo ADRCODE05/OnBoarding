@@ -8,7 +8,8 @@ import {
     updateUser,
     deleteUser,
     deleteByEmail,
-    loginUser
+    loginUser,
+    updateUserEmail
 } from "../services/userService.js";
 
 export const login = async (req, res) => {
@@ -37,6 +38,7 @@ export const login = async (req, res) => {
 }
 
 
+
 export const showGetAllUser = async (req, res) => {
     try {
         const user = await searchAllUsers()
@@ -50,6 +52,8 @@ export const showGetAllUser = async (req, res) => {
         })
     }
 };
+
+
 
 export const showGetUserId = async (req, res) => {
     try {
@@ -66,6 +70,7 @@ export const showGetUserId = async (req, res) => {
 };
 
 
+
 export const showGetUserEmail = async (req, res) => {
     try {
         const { email } = req.params
@@ -80,6 +85,7 @@ export const showGetUserEmail = async (req, res) => {
         })
     }
 };
+
 
 
 export const showCreateUser = async (req, res) => {
@@ -104,6 +110,29 @@ export const showCreateUser = async (req, res) => {
 };
 
 
+
+export const showUpdateUserEmail = async (req, res) => {
+    try {
+        const { email } = req. params
+        const { 
+            username,
+            newEmail,
+            password
+        } = req.body
+        const passwordHash = await bcrypt.hash(password, 10)
+        const data = await updateUserEmail(username, newEmail, passwordHash, email)
+        res.status(202).json(data)
+    } catch (error) {
+        console.error('Error al actualizar por email');
+        res.status(404).json({
+            message: 'Error al actualizar datos del usuario',
+            error: error.message
+        })
+    }
+}
+
+
+
 export const showUpdateUser = async (req, res) => {
     try {
         const { user_id } = req.params
@@ -126,6 +155,7 @@ export const showUpdateUser = async (req, res) => {
 };
 
 
+
 export const showDeleteUserId = async (req, res) => {
     try {
         const { user_id } = req.params
@@ -140,6 +170,7 @@ export const showDeleteUserId = async (req, res) => {
         })
     }
 };
+
 
 
 export const showDeleteUserEmail = async (req, res) => {

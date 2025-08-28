@@ -4,7 +4,8 @@ import {
     postCourse,
     deleteCourse,
     getCourseByTitle,
-    putCourse
+    putCourse,
+    deleteCourseByTitle
 } from "../models/coursesQueries.js";
 
 
@@ -16,11 +17,13 @@ export const serviceGetAllCourses = async () => {
 
 
 
-export const serviceGetCourseId = async (id_course) => {
+export const serviceGetCourseId = async (course_id) => {
     
-    if(!id_course) {
+    if(!course_id) {
         throw new Error('Campo obligatorio')
-    } else if(isNaN(id_course)) {
+    }
+    
+    if(Number.isInteger(Number(course_id))) {
         throw new Error('El id del curso tiene que ser nu numero valido')
     }
 
@@ -56,19 +59,19 @@ export const servicePostCourse = async (title, description, duration, state_id, 
     const data = await postCourse(title, description, duration, state_id, type_id)
 
     if(!data) {
-        throw new Error('Error no se pudo crear un nuevo usuario')
+        throw new Error('Error no se pudo crear un nuevo curso')
     }
 
     return data
 };
 
 
-export const servicePutCourse = async (title, description, duration, state_id, type_id, id_course) => {
-    if(!title || !description || !duration || !state_id || !type_id || !id_course) {
+export const servicePutCourse = async (title, description, duration, state_id, type_id, course_id) => {
+    if(!title || !description || !duration || !state_id || !type_id || !course_id) {
         throw new Error('Campos obligatorios')
     }
 
-    const data = await putCourse(title, description, duration, state_id, type_id, id_course);
+    const data = await putCourse(title, description, duration, state_id, type_id, course_id);
     
     if(!data) {
         throw new Error('Error al actualizar curso')
@@ -78,14 +81,14 @@ export const servicePutCourse = async (title, description, duration, state_id, t
 }
 
 
-export const serviceDeleteCourse = async (id_course) => {
-    if(!id_course) {
+export const serviceDeleteCourse = async (course_id) => {
+    if(!course_id) {
         throw new Error('Campo obligatorio');
-    } else if(isNaN(id_course)) {
+    } else if(isNaN(course_id)) {
         throw new Error('El id del curso tiene que ser un numero valido')
     }
 
-    const data = await deleteCourse(id_course) 
+    const data = await deleteCourse(course_id) 
     
     if(!data) {
         throw new Error('Error al eliminar el curso')
@@ -93,4 +96,20 @@ export const serviceDeleteCourse = async (id_course) => {
 
     return data
 };
+
+
+export const serviceDeleteCourseByTitle = async (title) => {
+    if(!title) {
+        throw new Error('Campo obligatorio');
+    }
+
+    const data = await deleteCourseByTitle(title) 
+    
+    if(!data) {
+        throw new Error('Error al eliminar el curso')
+    }
+
+    return data
+};
+
 

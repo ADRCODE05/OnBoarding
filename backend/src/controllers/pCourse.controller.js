@@ -24,8 +24,8 @@ export const coursePersonalizedAllGET = async (req, res) => {
 
 export const coursePersonalizedByIdGET = async (req, res) => {
     try {
-        const { id } = req.params
-        const data = await personalizedByIdGET(id)
+        const { coursep_id } = req.params
+        const data = await personalizedByIdGET(coursep_id)
         res.status(200).json(data)
     } catch (error) {
         console.error('Error obteniendo curso personalizado por ID', error.message);
@@ -39,7 +39,7 @@ export const coursePersonalizedByIdGET = async (req, res) => {
 
 export const coursePersonalizedByTitleGET = async (req, res) => {
     try {
-        const { title } = req.body
+        const { title } = req.params
         const data = await personalizedBytitleGET(title)
         res.status(200).json(data)
     } catch (error) {
@@ -76,7 +76,7 @@ export const coursePersonalizedNew = async (req, res) => {
 
 export const coursePersonalizedUpdatePUT = async (req, res) => {
     try {
-        const { id } = req.params
+        const { coursep_id } = req.params
         const { 
             title,
             description,
@@ -85,7 +85,7 @@ export const coursePersonalizedUpdatePUT = async (req, res) => {
             state_id,
             type_id
         } = req.body
-        const data = await personalizedUpdatePUT(title, description, duration, company_id, state_id, type_id, id)
+        const data = await personalizedUpdatePUT(title, description, duration, company_id, state_id, type_id, coursep_id)
         res.status(200).json(data)
     } catch (error) {
         console.error('Error al actualizar curso personalizado', error.message);
@@ -99,8 +99,8 @@ export const coursePersonalizedUpdatePUT = async (req, res) => {
 
 export const coursePersonalizedRemoveByIdDELETE = async (req, res) => {
     try {
-        const { id } = req.params
-        const data = await personalizedRemoveByIdDELETE(id)
+        const { coursep_id } = req.params
+        const data = await personalizedRemoveByIdDELETE(coursep_id)
         res.status(200).json(data)
     } catch (error) {
         console.error('Error al eliminar curso personalizado por Id', error.message);
@@ -114,7 +114,7 @@ export const coursePersonalizedRemoveByIdDELETE = async (req, res) => {
 
 export const coursePersonalizedRemoveByTitleDELETE = async (req, res) => {
     try {
-        const { title } = req.body
+        const { title } = req.params
         const data = await personalizedRemoveByTitleDELETE(title)
         res.status(200).json(data)
     } catch (error) {
