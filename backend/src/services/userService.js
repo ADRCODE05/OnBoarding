@@ -16,16 +16,21 @@ import {
 
 
 export const loginUser = async (email, password) => {
-    const user = await getUsersEmail(email)
+    const user = await getUsersEmail(email.toLowerCase())
     if(!user) {
-        throw new Error('Usuario no encontrado')
+        throw new Error('Credenciales invalidas')
     }
 
     const validate = await bcrypt.compare(password, user.password)
     if(!validate) {
         throw new Error('Credenciales invalidas')
     }
-    const token = await crearToken(user.email)
+    const token = await crearToken({
+        id: user.user_id,
+        email: user.email,
+        id_role: user.role_id
+    })
+    delete user.password
     return  { token, user }
 }
 
@@ -83,14 +88,14 @@ export const createUser = async (username, email, password) => {
 
 
 export const updateUser = async (username, email, password, user_id) => {
-    if(!user_id||!username || !email || !password) {
+    if(!username || !email || !password || !user_id) {
         throw new Error('Campo obligatorios')
     } 
 
     if(isNaN(user_id)) {
         throw new Error('El id del usuario tiene que ser un numero valido')
     }
-    const updateId = await putUserid(user_id, username, email, password)
+    const updateId = await putUserid(username, email, password, user_id)
 
     if(!updateId) {
         throw new Error('Usuario no existe');

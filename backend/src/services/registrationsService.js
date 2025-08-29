@@ -5,7 +5,7 @@ import {
         putRegister,
         putRegisterById,
         deleteRegister
-} from "../models/registrationsQueries";
+} from "../models/registrationsQueries.js";
 
 
 

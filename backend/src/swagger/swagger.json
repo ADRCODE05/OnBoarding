@@ -7,12 +7,47 @@
     },
     "server": [
         {
-            "url": "http://localhost:3000/api/v1",
+            "url": "http://localhost:4000/api/v1",
             "description": "Server local"
         }
     ],
     "paths": {
-        "/api/v1/users": {
+        "/login": {
+            "post": {
+                "summary": "login",
+                "tags": ["Public"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "email",
+                                    "password"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "login successful"
+                    },
+                    "404": {
+                        "description": "login error"
+                    }
+                }
+            }
+        },
+        "/users": {
             "get": {
                 "summary": "get all users",
                 "tags": ["users"],
@@ -23,7 +58,7 @@
                 }
             }
         },
-        "/api/v1/users/{user_id}": {
+        "/users/id/{user_id}": {
             "get": {
                 "summary": "get user by id",
                 "tags": ["users"],
@@ -45,7 +80,7 @@
                 }
             }
         },
-        "/api/v1/users/email/{email}": {
+        "/users/email/{email}": {
             "get": {
                 "summary":"get user by email",
                 "tags":["users"],
@@ -67,7 +102,7 @@
                 }
             }
         },
-        "/api/v1/users/create": {
+        "/users/create": {
             "post": {
                 "summary": "create new user",
                 "tags": ["users"],
@@ -107,7 +142,7 @@
                 }
             }
         },
-        "/api/v1/users/update/{user_id}": {
+        "/users/update/id/{user_id}": {
             "put": {
                 "summary": "update user by id",
                 "tags": ["users"],
@@ -155,7 +190,55 @@
                 }
             }
         },
-        "/api/v1/users/delete/{user_id}": {
+        "/user/update/email/{email}": {
+            "post": {
+                "summary": "update user by email",
+                "tags": ["users"],
+                "parameters": [{
+                    "name": "email",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "requestBody":{
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "newEmail": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "username",
+                                    "newEmail",
+                                    "password"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "the user was updated correctly"
+                    },
+                    "304": {
+                        "description": "The user could not be updated by email"
+                    }
+                }
+            }
+        },
+        "/users/delete/id/{user_id}": {
             "delete": {
                 "summary": "delete user by id",
                 "tags": ["users"],
@@ -178,7 +261,7 @@
                 }
             }
         },
-        "/api/v1/users/delete/email/{email}": {
+        "/users/delete/email/{email}": {
             "delete": {
                 "summary": "delete user by email",
                 "tags": ["users"],
@@ -200,7 +283,7 @@
                 }
             }
         },
-        "/api/v1/employees": {
+        "/employees": {
             "get": {
                 "summary": "search all employees",
                 "tags": ["employees"],
@@ -214,7 +297,7 @@
                 }
             }
         },
-        "/api/v1/employees/{id}": {
+        "/employees/id/{id}": {
             "get": {
                 "summary": "looking for employee by id",
                 "tags": ["employees"],
@@ -236,7 +319,29 @@
                 }
             }
         },
-        "/api/v1/employees/new/employee": {
+        "/employees/idenntification/{identification_number}": {
+            "get": {
+                "summary": "search for employees by ID number",
+                "tags": ["employees"],
+                "parameters": [{
+                    "name": "idenntification_number",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Searching for an employee by ID number was successful"
+                    },
+                    "404": {
+                        "description": "Error searching for employee by ID number"
+                    }
+                }
+            }
+        },
+        "/employees/new/employee": {
             "post": {
                 "summary": "add a new employee",
                 "tags": ["employees"],
@@ -288,12 +393,133 @@
                 }
             }
         },
-        "/api/v1/employees/remove/employee/{id}": {
+        "/employees/update/id/{employee_id}": {
+            "put": {
+                "summary": "update employee by id",
+                "tags": ["employees"],
+                "parameters": [{
+                    "name": "employee_id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "full_name": {
+                                        "type": "string"
+                                    },
+                                    "identification_number": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "charge_id": {
+                                        "type": "integer"
+                                    },
+                                    "company_id": {
+                                        "type": "integer"
+                                    },
+                                    "user_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "full_name",
+                                    "identification_number",
+                                    "phone",
+                                    "charge_id",
+                                    "company_id",
+                                    "user_id"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The employee was updated by ID successfully."
+                    },
+                    "304": {
+                        "description": "Error updating employee by id"
+                    }
+                }
+            }
+        },
+        "/employees/update/idenntification/{identification_number}": {
+            "put": {
+                "summary": "update employee by ID number",
+                "tags": ["employees"],
+                "parameters":[{
+                    "name": "idenntification_number",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "full_name": {
+                                        "type": "string"
+                                    },
+                                    "newIdentification_number": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "charge_id": {
+                                        "type": "integer"
+                                    },
+                                    "company_id": {
+                                        "type": "integer"
+                                    },
+                                    "user_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "full_name",
+                                    "newIdentification_number",
+                                    "phone",
+                                    "charge_id",
+                                    "company_id",
+                                    "user_id"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The employee's ID number was updated successfully."
+                    },
+                    "304": {
+                        "description": "Something went wrong while updating the employee ID number."
+                    }
+                    
+                }
+            }
+        },
+        "/employees/delete/id/{employee_id}": {
             "delete": {
                 "summary": "delete user by id",
                 "tags": ["employees"],
                 "parameters": [{
-                    "name": "id",
+                    "name": "employee_id",
                     "in": "path",
                     "required": true,
                     "schema": {
@@ -310,7 +536,29 @@
                 }
             }
         },
-        "/api/v1/course": {
+        "/employees/delete/idenntification/{identification_number}": {
+            "delete": {
+                "summary": "delete employee by ID number",
+                "tags": ["employees"],
+                "parameters": [{
+                    "name": "idenntification_number",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Employee eliminated by ID number with success"
+                    },
+                    "404": {
+                        "description": "The user could not be deleted by ID number."
+                    }
+                }
+            }
+        },
+        "/course": {
             "get": {
                 "summary": "search all courses",
                 "tags": ["courses"],
@@ -324,7 +572,7 @@
                 }
             }
         },
-        "/api/v1/course/{course_id}": {
+        "/course/id/{course_id}": {
             "get": {
                 "summary": "search course by id",
                 "tags": ["courses"],
@@ -346,7 +594,7 @@
                 }
             }
         },
-        "/api/v1/course/{title}": {
+        "/course/title/{title}": {
             "get": {
                 "summary": "search for courses by title",
                 "tags": ["courses"],
@@ -368,7 +616,7 @@
                 }
             }
         },
-        "/api/v1/course/create": {
+        "/course/create": {
             "post": {
                 "summary": "create new course",
                 "tags": ["courses"],
@@ -416,7 +664,7 @@
                 }
             }
         },
-        "/api/v1/course/update/{course_id}": {
+        "/course/update/{course_id}": {
             "put": {
                 "summary": "edit course by id",
                 "tags": ["courses"],
@@ -472,7 +720,7 @@
                 }
             }
         },
-        "/api/v1/course/delete/{course_id}": {
+        "/course/delete/id/{course_id}": {
             "delete": {
                 "summary": "delete course by id",
                 "tags": ["courses"],
@@ -494,7 +742,29 @@
                 }
             }
         },
-        "/api/v1/course/personalized": {
+        "/course/delete/title/{title}": {
+            "delete": {
+                "summary": "delete course by title",
+                "tags": ["courses"],
+                "parameters": [{
+                    "name": "title",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Delete course by title successfully"
+                    },
+                    "404": {
+                        "description": "Error deleting course by title"
+                    }
+                }
+            }
+        },
+        "/course/personalized": {
             "get": {
                 "summary": "search all custom courses",
                 "tags": ["courses personalized"],
@@ -508,7 +778,7 @@
                 }
             }
         },
-        "/api/v1/course/personalized/{id}": {
+        "/course/personalized/id/{id}": {
             "get": {
                 "summary": "Search custom course by id",
                 "tags": ["courses personalized"],
@@ -530,28 +800,18 @@
                 }
             }
         },
-        "/api/v1/course/personalized/title": {
+        "/course/personalized/title/{title}": {
             "get": {
                 "summary": "search for a custom course by title",
                 "tags": ["courses personalized"],
-                "requestBody": {
+                "parameters": [{
+                    "name": "title",
+                    "in": "path",
                     "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "email": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": [
-                                    "email"
-                                ]
-                            }
-                        }
+                    "schema": {
+                        "type": "string"
                     }
-                },
+                }],
                 "responses": {
                     "200": {
                         "description": "success in finding personalized course by title"
@@ -562,7 +822,7 @@
                 }
             }
         },
-        "/api/v1/course/personalized/new": {
+        "/course/personalized/new": {
             "post": {
                 "summary": "create a new custom course",
                 "tags": ["courses personalized"],
@@ -614,8 +874,8 @@
                 }
             }
         },
-        "/api/v1/course/personalized/update/{coursep_id}": {
-            "get": {
+        "/course/personalized/update/{coursep_id}": {
+            "post": {
                 "summary": "update course by id",
                 "tags": ["courses personalized"],
                 "parameters": [{
@@ -674,7 +934,7 @@
                 }
             }
         },
-        "/api/v1/course/personalized/delete/:coursep_id": {
+        "/course/personalized/delete/id/:coursep_id": {
             "delete": {
                 "summary": "delete custom course by id",
                 "tags": ["courses personalized"],
@@ -696,10 +956,68 @@
                 }
             }
         },
-        "/api/v1/course/personalized/delete": {
+        "/course/personalized/delete/title/{title}": {
             "delete": {
                 "summary": "delete custom course by title",
                 "tags": ["courses personalized"],
+                "parameters": [{
+                    "name": "title",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Course was successfully eliminated by title"
+                    },
+                    "404": {
+                        "description": "Error deleting course by title"
+                    }
+                }
+            }
+        },
+        "/registrantion/": {
+            "get": {
+                "summary": "search all course records",
+                "tags": ["registrantions"],
+                "responses": {
+                    "200": {
+                        "description": "success in obtaining the records"
+                    },
+                    "404": {
+                        "description": "error could not get records"
+                    }
+                }
+            }
+        },
+        "/registrantion/id/{registrantion_id}": {
+            "get": {
+                "summary": "search record by id",
+                "tags": ["registrantions"],
+                "parameters": [{
+                    "name": "registration_id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Successful search for record by ID"
+                    },
+                    "404": {
+                        "description": "Error getting record by id"
+                    }
+                }
+            }
+        },
+        "/registrantion/new": {
+            "post": {
+                "summary": "create new record",
+                "tags": ["registrantions"],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -707,18 +1025,166 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "title": {
+                                    "employee_id": {
+                                        "type": "integer"
+                                    },
+                                    "start_date": {
+                                        "type": "string"
+                                    },
+                                    "end_date": {
+                                        "type": "string"
+                                    },
+                                    "coursep_id": {
+                                        "type": "string"
+                                    },
+                                    "course_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "employee_id",
+                                    "star_date",
+                                    "end_date",
+                                    "coursep_id",
+                                    "course_id"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "the record was created successfully"
+                    },
+                    "404": {
+                        "description": "error creating record"
+                    }
+                }
+            }
+        },
+        "/registrantion/update/all/{registration_id}": {
+            "put": {
+                "summary": "edit record",
+                "tags": ["registrantions"],
+                "parameters": [{
+                    "name": "registration_id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "employee_id": {
+                                        "type": "integer"
+                                    },
+                                    "start_date": {
+                                        "type": "string"
+                                    },
+                                    "end_date": {
+                                        "type": "string"
+                                    },
+                                    "coursep_id": {
+                                        "type": "string"
+                                    },
+                                    "course_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "employee_id",
+                                    "star_date",
+                                    "end_date",
+                                    "coursep_id",
+                                    "course_id"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "the record was updated successfully"
+                    },
+                    "304": {
+                        "description": "error updating entire record"
+                    }
+                }
+            }
+        },
+        "/registrantion/update/{regsitrantion_id}": {
+            "put": {
+                "summary": "update record (start date) (end date)",
+                "tags": ["registrantions"],
+                "parameters": [{
+                    "name": "registration_id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type":"integer"
+                    }
+                }],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type":"object",
+                                "properties": {
+                                    "start_date": {
+                                        "type": "string"
+                                    },
+                                    "end_date": {
                                         "type": "string"
                                     }
                                 },
                                 "required": [
-                                    "title"
+                                    "star_date",
+                                    "end_date"
                                 ]
                             }
                         }
+                    }
+                    
+                },
+                "responses": {
+                    "200": {
+                        "description": "the record was updated successfully, (start date) (end date)"
+                    },
+                    "304": {
+                        "description": "error updating record, (start date) (end date)"
+                    }
+                }
+            }
+        },
+        "/registrantion/delete/{registration_id}": {
+            "delete": {
+                "summary": "delete record",
+                "tags": ["registrantions"],
+                "parameters": [{
+                    "name": "registration_id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "the record was deleted successfully"
+                    },
+                    "404": {
+                        "description": "Error deleting the record"
                     }
                 }
             }
         }
     }
 }
+

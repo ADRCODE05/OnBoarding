@@ -22,9 +22,7 @@ export const login = async (req, res) => {
         res.status(200).json({
             message: 'Login exitoso', token,
             user: {
-                id: user.user_id,
-                email: user.email,
-                role: user.role_id
+                email: user.email
             }
         })
     } catch (error) {
@@ -140,14 +138,14 @@ export const showUpdateUser = async (req, res) => {
             username,
             email,
             password
-        } = req.body
+        } = req.body || {}
         const passwordHash = await bcrypt.hash(password, 10)
-        const updateUserId = await updateUser(user_id, username, email, passwordHash)
+        const updateUserId = await updateUser(username, email, passwordHash, user_id)
         res.status(202).json(updateUserId)
     } catch (error) {
         console.error('Error updating user:', error.message);
         
-        res.status(500).json({
+        res.status(404).json({
             message: 'Error updating user',
             error: error.message
         })
@@ -164,7 +162,7 @@ export const showDeleteUserId = async (req, res) => {
     } catch (error) {
         console.error('Error deleting user by id: ', error.message);
         
-        res.status(500).json({
+        res.status(404).json({
             message: 'Error deleting user by id',
             error: error.message
         })
@@ -183,7 +181,7 @@ export const showDeleteUserEmail = async (req, res) => {
     } catch (error) {
         console.error('Error deleting user by email: ', error.message);
         
-        res.status(500).json({
+        res.status(404).json({
             message: 'Error deleting user by email',
             error: error.message
         })

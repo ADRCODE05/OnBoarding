@@ -13,7 +13,7 @@ export const viewsAllEmployee = async (req, res) => {
         const employee = await allEmployee()
         res.status(200).json(employee)
     } catch (error) {
-        console.error('Error:', error.message);
+        console.error(error.message);
         
         res.status(404).json({
             message: 'Error al obtener empleados',
@@ -25,11 +25,11 @@ export const viewsAllEmployee = async (req, res) => {
 
 export const viewsEmployeeById = async (req, res) => {
     try {
-        const { id } = req.params
-        const employeeId = await searchEmployeeById(id)
+        const { employee_id } = req.params
+        const employeeId = await searchEmployeeById(employee_id)
         res.status(200).json(employeeId)
     } catch (error) {
-        console.error('Error: ', error.message);
+        console.error(error.message);
         
         res.status(404).json({
             message: 'Error al obtener empleado por id',
@@ -46,7 +46,7 @@ export const viewsEmployeeByIdentification = async (req, res) => {
         const data = await searchEmployeeByidentification(identification_number)
         res.status(200).json(data)
     } catch (error) {
-        console.error('Error al obtener empleado con la identificacion', error.message)
+        console.error(error.message)
         res.status(404).json({
             message: 'No se encontro el empleado con esa identificacion',
             error: error.message
@@ -80,7 +80,7 @@ export const viewsNewEmployee = async (req, res) => {
 
 export const viewsPutEmployeesById = async (req, res) => {
     try {
-        const { id } = req.params
+        const { employee_id } = req.params
         const { 
             full_name,
             identification_number,
@@ -89,10 +89,10 @@ export const viewsPutEmployeesById = async (req, res) => {
             company_id,
             user_id
         } = req.body
-        const data = await employeeByIdPUT(full_name, identification_number, phone, charge_id, company_id, user_id, id)
+        const data = await employeeByIdPUT(full_name, identification_number, phone, charge_id, company_id, user_id, employee_id)
         res.status(200).json(data)
     } catch (error) {
-        console.error('error al actualizar empleado', error.message);
+        console.error(error.message);
         res.status(404).json({
             message: 'No se pudo actualizar el cliente',
             error: error.message
@@ -115,7 +115,7 @@ export const viewsPutEmployeesByIdentification = async (req, res) => {
         const data = await employeeByIdPUT(full_name, newIdentification, phone, charge_id, company_id, user_id, identification_number)
         res.status(200).json(data)
     } catch (error) {
-        console.error('error al actualizar empleado', error.message);
+        console.error( error.message);
         res.status(404).json({
             message: 'No se pudo actualizar el cliente',
             error: error.message
@@ -130,7 +130,7 @@ export const viewsDeleteEmployees = async (req, res) => {
         const doAwayEmployee = await deleteEmployee(id) 
         res.status(200).json(doAwayEmployee);
     } catch (error) {
-        console.error('Error: ', error.message);
+        console.error( error.message);
         res.status(404).json({
             message: 'Error al eliminar empleado',
             error: error.message
@@ -146,7 +146,7 @@ export const viewsDeleteEmployeesByIdentification = async (req, res) => {
         const doAwayEmployee = await deleteEmployee(identification_number) 
         res.status(200).json(doAwayEmployee);
     } catch (error) {
-        console.error('Error: ', error.message);
+        console.error(error.message);
         res.status(404).json({
             message: 'Error al eliminar empleado',
             error: error.message

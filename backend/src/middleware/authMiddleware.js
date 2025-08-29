@@ -1,8 +1,8 @@
 import { validarToken } from "../utils/jwt.js";
 
-export const authMiddleware = async (req, res, next) => {
+export const authMiddleware =    (req, res, next) => {
     const AuthHeaders = req.headers['authorization']
-    if(!authorization) {
+    if(!AuthHeaders) {
         return res.status(401).json({
             error: 'Token requerido'
         })
@@ -14,8 +14,8 @@ export const authMiddleware = async (req, res, next) => {
         req.user = result
         next()
     } catch (error) {
-        res.status(498).json({
-            error: 'Error token invalido'
+        res.status(401).json({
+            error: 'Token invalido o expirado'
         });
         
     }
@@ -24,14 +24,14 @@ export const authMiddleware = async (req, res, next) => {
 
 export const authRol = async (rolAsignado) => {
     return (req, res, next) => {
-        if(!res.user) {
+        if(!req.user) {
             return res.status(401).json({
-                error: 'usuario no autenticado'
+                error: 'Usuario no autenticado'
             })
         }
         
         if(req.user.id_role !== rolAsignado) {
-            res.status(401).json({
+            return res.status(403).json({
                 error: 'Acceso denegado'
             })
         }
