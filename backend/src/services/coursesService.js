@@ -18,16 +18,17 @@ export const serviceGetAllCourses = async () => {
 
 
 export const serviceGetCourseId = async (course_id) => {
+    course_id = Number(course_id)
     
     if(!course_id) {
         throw new Error('Campo obligatorio')
     }
     
-    if(Number.isInteger(Number(course_id))) {
+    if(isNaN(course_id)) {
         throw new Error('El id del curso tiene que ser nu numero valido')
     }
 
-    const data = await getCourseById(id)
+    const data = await getCourseById(course_id)
     if(!data) {
         throw new Error('Error no existe el curso, por favor intentar mas tarde.....')
     }
@@ -52,8 +53,16 @@ export const serviceGetCourseTitle = async (title) => {
 
 
 export const servicePostCourse = async (title, description, duration, state_id, type_id) => {
+    duration = new Date()
+    state_id = Number(state_id)
+    type_id = Number(type_id)
+
     if(!title || !description || !duration || !state_id || !type_id) {
         throw new Error('Campos obligatorios')
+    }
+
+    if(isNaN(state_id) || isNaN(type_id)) {
+        throw new Error('El id del tiene que ser un numero valido')
     }
 
     const data = await postCourse(title, description, duration, state_id, type_id)
@@ -67,10 +76,18 @@ export const servicePostCourse = async (title, description, duration, state_id, 
 
 
 export const servicePutCourse = async (title, description, duration, state_id, type_id, course_id) => {
+    duration = new Date();
+    state_id = Number(state_id);
+    type_id = Number(type_id);
+
+
     if(!title || !description || !duration || !state_id || !type_id || !course_id) {
         throw new Error('Campos obligatorios')
     }
 
+    if(isNaN(state_id) || isNaN(type_id)) {
+        throw new Error('El id tiene que ser nu numero valido')
+    }
     const data = await putCourse(title, description, duration, state_id, type_id, course_id);
     
     if(!data) {
@@ -82,10 +99,16 @@ export const servicePutCourse = async (title, description, duration, state_id, t
 
 
 export const serviceDeleteCourse = async (course_id) => {
+    course_id = Number(course_id);
+
+
     if(!course_id) {
         throw new Error('Campo obligatorio');
-    } else if(isNaN(course_id)) {
-        throw new Error('El id del curso tiene que ser un numero valido')
+    }
+    
+    
+    if(isNaN(course_id)) {
+        throw new Error('El id tiene que ser un numero valido')
     }
 
     const data = await deleteCourse(course_id) 

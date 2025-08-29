@@ -48,12 +48,12 @@ export const putEmployeesById = async (full_name, identification_number, phone, 
 };
 
 
-export const putEmployeesByIdentification = async (full_name, newIdentification_number, phone, charge_id, company_id, idenctication_number) => {
+export const putEmployeesByIdentification = async (full_name, newIdentification, phone, charge_id, company_id, user_id, idenctication_number) => {
     const query = (`UPDATE employees
-                    SET full_name = $1, identification_number = $2, phone = $3, charge_id = $4, company_id = $5, updated_at = CURRENT_TIMESTAMP
-                    WHERE identication_number = $6
+                    SET full_name = $1, identification_number = $2, phone = $3, charge_id = $4, company_id = $5, user_id = $6, updated_at = CURRENT_TIMESTAMP
+                    WHERE identication_number = $7
                     RETURNING *;`)
-    const values = [full_name, newIdentification_number, phone, charge_id, company_id, idenctication_number];
+    const values = [full_name, newIdentification, phone, charge_id, company_id, user_id, idenctication_number];
     const result = await pool.query(query, values)
     return result.rows[0]
 }

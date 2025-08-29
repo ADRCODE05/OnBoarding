@@ -2,8 +2,6 @@ import {
         allRegister,
         registerById,
         newRegister,
-        editAllRegister,
-        editRegisterById,
         eliminateRegister
 } from "../services/registrationsService.js";
 
@@ -41,12 +39,10 @@ export const registrationCreate = async (req, res) => {
     try {
         const {
             employee_id,
-            star_date,
-            end_date,
             coursep_id,
             course_id
         } = req.body
-        const data = await newRegister(employee_id, star_date, end_date, coursep_id, course_id);
+        const data = await newRegister(employee_id, coursep_id, course_id);
         res.status(200).json(data)
     } catch (error) {
         console.error('error al crear registro', error.message);

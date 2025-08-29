@@ -19,7 +19,6 @@
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.16.3",
-    "pg-format": "^1.0.4",
     "swagger-ui-express": "^5.0.1"
   }
 }

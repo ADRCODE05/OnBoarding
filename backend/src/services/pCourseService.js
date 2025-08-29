@@ -22,10 +22,6 @@ export const personalizedByIdGET = async (coursep_id) => {
         throw new Error('El campo es obligatorio')
     }
 
-    if(isNaN(coursep_id)) {
-        throw new Error('El dato ingresado debe ser un numero valido')
-    };
-
     const data = await getPersonalizedById(coursep_id)
 
     if(!data) {
@@ -51,8 +47,12 @@ export const personalizedBytitleGET = async (title) => {
 };
 
 
-export const personalizedNewCoursePOST = async (title, description, duration, company_id, state_id, type_id) => {
-    if(!title || !description || !duration || !company_id || !state_id || !type_id) {
+export const personalizedNewCoursePOST = async (coursep_id, title, description, duration, company_id, state_id, type_id) => {
+    company_id = Number(company_id);
+    state_id = Number(state_id);
+    type_id = Number(type_id)
+    
+    if(!coursep_id || !title || !description || !duration || !company_id || !state_id || !type_id) {
         throw new Error('Los campos para crear un curso son obligatorios')
     }
 
@@ -71,11 +71,16 @@ export const personalizedNewCoursePOST = async (title, description, duration, co
 
 
 export const personalizedUpdatePUT = async (title, description, duration, company_id, state_id, type_id, coursep_id) => {
+    company_id = Number(company_id);
+    state_id = Number(state_id);
+    type_id = Number(type_id);
+
+
     if(!title || !description || !duration || !company_id || !state_id || !type_id || !coursep_id) {
         throw new Error('Los campos para crear un curso son obligatorios')
     }
 
-    if(isNaN(company_id) && isNaN(state_id) && isNaN(type_id) && isNaN(coursep_id)) {
+    if(isNaN(company_id) && isNaN(state_id) && isNaN(type_id)) {
         throw new Error('Los campos que tenga Id tienen que tener un numero valido');
     }
 
@@ -93,11 +98,6 @@ export const personalizedRemoveByIdDELETE = async (coursep_id) => {
     if(!coursep_id) {
         throw new Error('El campo es obligatorio')
     }
-
-    if(Number.isInteger(Number(coursep_id))) {
-        throw new Error('El dato ingresado tiene que ser un numero valido')
-    }
-
     const data = await deletePersonalizedById(coursep_id)
 
     if(!data) {

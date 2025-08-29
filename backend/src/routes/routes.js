@@ -47,7 +47,7 @@ import {
 } from "../controllers/course.controller.js";
 
 
-
+// Course personalized
 import { 
         coursePersonalizedAllGET, 
         coursePersonalizedByIdGET,
@@ -59,14 +59,12 @@ import {
 } from "../controllers/pCourse.controller.js";
 
 
-
+// Registration 
 import { 
         registrationAll, 
         registrationById, 
         registrationCreate, 
-        registrationdelete, 
-        registrationUpdate, 
-        registrationUpdateAll 
+        registrationdelete
 } from "../controllers/registration.controller.js";
 
 
@@ -153,8 +151,6 @@ router.put('/course/personalized/update/:coursep_id', coursePersonalizedUpdatePU
 
 router.delete('/course/personalized/delete/id/:coursep_id', coursePersonalizedRemoveByIdDELETE)
 
-
-
 router.delete('/course/personalized/delete/title/:title', coursePersonalizedRemoveByTitleDELETE)
 
 
@@ -165,10 +161,6 @@ router.get('/registrantion/', registrationAll)
 router.get('/registrantion/id/:registration_id', registrationById)
 
 router.post('/registrantion/new', registrationCreate)
-
-router.put('/registrantion/update/:regsitrantion_id', registrationUpdate)
-
-router.put('/registrantion/update/all/:registration_id', registrationUpdateAll)
 
 router.delete('/registrantion/delete/:registration_id', registrationdelete)
 

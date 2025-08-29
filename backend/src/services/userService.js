@@ -21,8 +21,8 @@ export const loginUser = async (email, password) => {
         throw new Error('Credenciales invalidas')
     }
 
-    const validate = await bcrypt.compare(password, user.password)
-    if(!validate) {
+    const data = await bcrypt.compare(password, user.password)
+    if(!data) {
         throw new Error('Credenciales invalidas')
     }
     const token = await crearToken({
@@ -37,23 +37,31 @@ export const loginUser = async (email, password) => {
 
 
 export const searchAllUsers = async () => {
-    const existing = await getUsers();
-    return existing
+    const data = await getUsers();
+    return data
 };
 
 
 
 export const searchUserId = async (user_id) => {
-    if(!user_id || isNaN(user_id)) {
-        throw new Error('El ID debe ser un numero valido')
+    user_id = Number(user_id)
+
+
+    if(!user_id) {
+        throw new Error('El campo es obligatorio')
+    }
+
+
+    if(isNaN(user_id)) {
+        throw new Error('El id tiene que ser un numero valido');
     }
     
-    const existingUser = await getUsersId(user_id)
+    const data = await getUsersId(user_id)
 
-    if(!existingUser) {
+    if(!data) {
         throw new Error('User does not exist')
     } 
-    return existingUser
+    return data
 };
 
 
@@ -62,12 +70,12 @@ export const searchUserEmail = async (email) => {
         throw new Error('The email is empty')
     }
     
-    const existing = await getUsersEmail(email)
+    const data = await getUsersEmail(email)
     
-    if(!existing) {
+    if(!data) {
         throw new Error('The email does not match any')
     }
-    return existing
+    return data
 };
 
 
@@ -76,18 +84,20 @@ export const createUser = async (username, email, password) => {
         throw new Error('Required fields')
     }
 
-    const defaultRole = 2;
+    const defaultRole = 3;
     
-    const newUser = await postUser(username, email, password, defaultRole)
+    const data = await postUser(username, email, password, defaultRole)
     
-    if(!newUser || !newUser.user_id) {
+    if(!data || !data.user_id) {
         throw new Error('ERROR DE NUEVO')
     }
-    return newUser
+    return data
 };
 
 
 export const updateUser = async (username, email, password, user_id) => {
+    user_id = Number(user_id)
+
     if(!username || !email || !password || !user_id) {
         throw new Error('Campo obligatorios')
     } 
@@ -95,12 +105,12 @@ export const updateUser = async (username, email, password, user_id) => {
     if(isNaN(user_id)) {
         throw new Error('El id del usuario tiene que ser un numero valido')
     }
-    const updateId = await putUserid(username, email, password, user_id)
+    const data = await putUserid(username, email, password, user_id)
 
-    if(!updateId) {
+    if(!data) {
         throw new Error('Usuario no existe');
     }
-    return updateId
+    return data
 };
 
 
@@ -121,16 +131,22 @@ export const updateUserEmail = async (username, newEmail, password, email) => {
 
 
 export const deleteUser = async (user_id) => {
-    if(!user_id || isNaN(user_id)) {
-        throw new Error('El di tiene que ser un numero valido')
+    user_id = Number(user_id)
+
+    if(!user_id) {
+        throw new Error('El campo es obligatorio')
     }
 
-    const deleteId = await deleteUserId(user_id)
+    if(isNaN(user_id)) {
+        throw new Error('El id tiene que ser un numero valido')
+    }
 
-    if(!deleteId) {
+    const data = await deleteUserId(user_id)
+
+    if(!data) {
         throw new Error('Usuario no encontrado')
     }
-    return deleteId
+    return data
 };
 
 
@@ -139,12 +155,12 @@ export const deleteByEmail = async (email) => {
         throw new Error('El campo es obligatorio')
     }
 
-    const deleteEmail = await deleteUserEmail(email)
+    const data = await deleteUserEmail(email)
 
-    if(!deleteEmail) {
+    if(!data) {
         throw new Error('Usuario no encontrado')
     }
-    return deleteEmail
+    return data
 };
 
 

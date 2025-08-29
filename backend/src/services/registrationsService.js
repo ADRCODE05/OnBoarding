@@ -2,8 +2,6 @@ import {
         getAllRegister,
         getRegisterById,
         postRegister,
-        putRegister,
-        putRegisterById,
         deleteRegister
 } from "../models/registrationsQueries.js";
 
@@ -17,6 +15,8 @@ export const allRegister = async () => {
 
 
 export const registerById = async (registration_id) => {
+    registration_id = Number(registration_id);
+
     if(!registration_id) {
         throw new Error('El campo es obligatorio');
     }
@@ -30,12 +30,19 @@ export const registerById = async (registration_id) => {
 };
 
 
-export const newRegister = async (employee_id, star_date, end_date, coursep_id, course_id) => {
-    if(!employee_id || !star_date || !end_date || !coursep_id || !course_id) {
+export const newRegister = async (employee_id, coursep_id, course_id) => {
+    employee_id = Number(employee_id);
+    course_id = Number(course_id);
+
+    if(!employee_id || !coursep_id || !course_id) {
         throw new Error('Los campos son obligatorios')
     }
 
-    const data = await postRegister(employee_id, star_date, end_date, coursep_id, course_id)
+    if(isNaN(employee_id) && isNaN(course_id)) {
+        throw new Error('Los id deben ser tipo de dato permitido')
+    }
+
+    const data = await postRegister(employee_id, coursep_id, course_id)
 
     if(!data) {
         throw new Error('No se puedo crear el nuevo registro')
@@ -45,40 +52,16 @@ export const newRegister = async (employee_id, star_date, end_date, coursep_id, 
 };
 
 
-export const editAllRegister = async (star_date, end_date, registration_id) => {
-    if(!star_date, end_date, registration_id) {
-        throw new Error('Los campos son obligatorios')
-    }
-
-    const data = await putRegister(star_date, end_date, registration_id)
-
-    if(!data) {
-        throw new Error('No se pudo actualizar el registro')
-    }
-
-    return data
-};
-
-
-export const editRegisterById = async (employee_id, star_date, end_date, coursep_id, course_id, registration_id) => {
-    if(!employee_id || !star_date || !end_date || !coursep_id || !course_id || !registration_id) {
-        throw new Error('Los campos son obligatorios')
-    }
-
-    const data = await putRegisterById(employee_id, star_date, end_date, coursep_id, course_id, registration_id) 
-
-    if(!data) {
-        throw new Error('no existe el registro')
-    }
-
-    return data
-};
-
-
-
 export const eliminateRegister = async (registration_id) => {
+    registration_id = Number(registration_id)
+
+
     if(!registration_id) {
         throw new Error('Campo obligatorio')
+    }
+
+    if(isNaN(registration_id)) {
+        throw new Error('El id debe ser numero permitido')
     }
 
     const data = await deleteRegister(registration_id)

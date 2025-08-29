@@ -1,8 +1,8 @@
 import { pool } from "../../db/db.js";
 
 export const getPersonalized = async () => {
-    const result = (`SELECT * FROM personalized_courses`)
-    return result
+    const result = await pool.query(`SELECT * FROM personalized_courses`)
+    return result.rows
 };
 
 
@@ -23,11 +23,11 @@ export const getPersonalizedByTitle = async (title) => {
 };
 
 
-export const postPersonalized = async (title, description, duration, company_id, state_id, type_id) => {
+export const postPersonalized = async (coursep_id, title, description, duration, company_id, state_id, type_id) => {
     const query = (`INSERT INTO personalized_courses (title, description, duration, company_id, state_id, type_id)
                     VALUES ($1, $2, $3, $4, $5, $6)
                     RETURNING *;`)
-    const values = [title, description, duration, company_id, state_id, type_id]
+    const values = [coursep_id, title, description, duration, company_id, state_id, type_id]
     const result = await pool.query(query, values)
     return result.rows[0]
 };

@@ -12,12 +12,13 @@ import {
 
 
 export const allEmployee = async () => {
-    const employeeAll = getEmployee();
-    return employeeAll
+    const data = getEmployee();
+    return data
 };
 
 
 export const searchEmployeeById = async (employee_id) => {
+    employee_id = Number(employee_id)
     if(!employee_id) {
         throw new Error('Campo obligatorio')
     }
@@ -25,12 +26,12 @@ export const searchEmployeeById = async (employee_id) => {
     if(isNaN(employee_id)) {
         throw new Error('Error el dato ingresado tiene q ser un numero')
     }
-    const existing = await getEmployeeById(employee_id)
+    const data = await getEmployeeById(employee_id)
 
-    if(!existing) {
+    if(!data) {
         throw new Error('El id del empleado no existe')
     }
-    return existing
+    return data
 };
 
 export const searchEmployeeByidentification = async (identification_number) => {
@@ -49,29 +50,34 @@ export const searchEmployeeByidentification = async (identification_number) => {
 
 
 export const newEmployee = async (full_name, identification_number, phone, charge_id, company_id, user_id) => {
+        charge_id = Number(charge_id)
+    company_id = Number(company_id)
+    user_id = Number(user_id)
+
+
     if(!full_name || !identification_number || !phone || !charge_id || !company_id || !user_id) {
         throw new Error('Campos obligatorios')
     }
 
-    if (!Number.isInteger(Number(charge_id)) || !Number.isInteger(Number(company_id))) {
+    if (!isNaN(charge_id) || !isNaN(company_id)) {
         throw new Error("El dato a buscar tiene que ser un numero entero valido");
     }
     
-    const employeeNew = await postEmployess(full_name, identification_number, phone, charge_id, company_id, user_id)
+    const data = await postEmployess(full_name, identification_number, phone, charge_id, company_id, user_id)
 
-    if(!employeeNew) {
+    if(!data) {
         throw new Error('Error al crear empleado')
     }
-    return employeeNew
+    return data
 };
 
 
 export const employeeByIdPUT = async (full_name, identification_number, phone, charge_id, company_id, user_id, employee_id) => {
-
     charge_id = Number(charge_id)
     company_id = Number(company_id)
     user_id = Number(user_id)
     employee_id = Number(employee_id)
+
     if(!full_name || !identification_number || !phone || !charge_id || !company_id || !user_id || !employee_id) {
         throw new Error('Los campos son obligatorios')
     }
@@ -81,7 +87,8 @@ export const employeeByIdPUT = async (full_name, identification_number, phone, c
     };
 
     const data = await putEmployeesById(full_name, identification_number, phone, charge_id, company_id, user_id, employee_id)
-
+    console.log(data);
+    
     
     if(!data) {
         throw new Error('No existe el empleado por id')
@@ -92,17 +99,21 @@ export const employeeByIdPUT = async (full_name, identification_number, phone, c
 
 
 
-export const employeeByidentificationPUT = async (full_name, newIdentification_number, phone, charge_id, company_id, idenctication_number) => {
-    if(!full_name || !newIdentification_number || !phone || !charge_id || !company_id || !idenctication_number) {
+export const employeeByidentificationPUT = async (full_name, newIdentification, phone, charge_id, company_id, user_id, idenctication_number) => {
+    charge_id = Number(charge_id)
+    company_id = Number(company_id)
+    user_id = Number(user_id)
+
+    if(!full_name || !newIdentification || !phone || !charge_id || !company_id || !user_id || !idenctication_number) {
         throw new Error('Campo obligatorio')
     }
 
-    if (!Number.isInteger(Number(charge_id)) || !Number.isInteger(Number(company_id))) {
+    if (!isNaN(charge_id) || !isNaN(company_id) || !isNaN(user_id)) {
         throw new Error("El dato a buscar tiene que ser un numero entero valido");
     }
 
 
-    const data = await putEmployeesByIdentification(full_name, newIdentification_number, phone, charge_id, company_id, idenctication_number)
+    const data = await putEmployeesByIdentification(full_name, newIdentification, phone, charge_id, company_id, idenctication_number)
 
     if(!data) {
         throw new Error('Empleado no existe por numero de identificacion')
@@ -112,17 +123,23 @@ export const employeeByidentificationPUT = async (full_name, newIdentification_n
 
 
 export const deleteEmployee = async (employee_id) => {
+    employee_id = Number(employee_id)
+
     if(!employee_id) {
         throw new Error('Campo obligatorio');
     }
 
-    const employeeDelete = await deleteEmployeesById(employee_id)
+    if(isNaN(employee_id)) {
+        throw new Error('El id tiene que ser un numero valido')
+    }
 
-    if(!employeeDelete) {
+    const data = await deleteEmployeesById(employee_id)
+
+    if(!data) {
         throw new Error('Error al eliminar empleado')
     }
 
-    return employeeDelete
+    return data
 }
 
 export const removeEmployeesByIdentification = async (idenctication_number) => {

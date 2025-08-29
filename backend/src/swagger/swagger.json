@@ -7,12 +7,12 @@
     },
     "server": [
         {
-            "url": "http://localhost:4000/api/v1",
+            "url": "http://localhost:4000",
             "description": "Server local"
         }
     ],
     "paths": {
-        "/login": {
+        "/api/v1/login": {
             "post": {
                 "summary": "login",
                 "tags": ["Public"],
@@ -47,7 +47,7 @@
                 }
             }
         },
-        "/users": {
+        "/api/v1/users": {
             "get": {
                 "summary": "get all users",
                 "tags": ["users"],
@@ -58,7 +58,7 @@
                 }
             }
         },
-        "/users/id/{user_id}": {
+        "/api/v1/users/id/{user_id}": {
             "get": {
                 "summary": "get user by id",
                 "tags": ["users"],
@@ -80,7 +80,7 @@
                 }
             }
         },
-        "/users/email/{email}": {
+        "/api/v1/users/email/{email}": {
             "get": {
                 "summary":"get user by email",
                 "tags":["users"],
@@ -102,7 +102,7 @@
                 }
             }
         },
-        "/users/create": {
+        "/api/v1/users/create": {
             "post": {
                 "summary": "create new user",
                 "tags": ["users"],
@@ -142,7 +142,7 @@
                 }
             }
         },
-        "/users/update/id/{user_id}": {
+        "/api/v1/users/update/id/{user_id}": {
             "put": {
                 "summary": "update user by id",
                 "tags": ["users"],
@@ -190,7 +190,7 @@
                 }
             }
         },
-        "/user/update/email/{email}": {
+        "/api/v1/user/update/email/{email}": {
             "post": {
                 "summary": "update user by email",
                 "tags": ["users"],
@@ -238,7 +238,7 @@
                 }
             }
         },
-        "/users/delete/id/{user_id}": {
+        "/api/v1/users/delete/id/{user_id}": {
             "delete": {
                 "summary": "delete user by id",
                 "tags": ["users"],
@@ -261,7 +261,7 @@
                 }
             }
         },
-        "/users/delete/email/{email}": {
+        "/api/v1/users/delete/email/{email}": {
             "delete": {
                 "summary": "delete user by email",
                 "tags": ["users"],
@@ -283,7 +283,7 @@
                 }
             }
         },
-        "/employees": {
+        "/api/v1/employees": {
             "get": {
                 "summary": "search all employees",
                 "tags": ["employees"],
@@ -297,7 +297,7 @@
                 }
             }
         },
-        "/employees/id/{id}": {
+        "/api/v1/employees/id/{id}": {
             "get": {
                 "summary": "looking for employee by id",
                 "tags": ["employees"],
@@ -319,7 +319,7 @@
                 }
             }
         },
-        "/employees/idenntification/{identification_number}": {
+        "/api/v1/employees/idenntification/{identification_number}": {
             "get": {
                 "summary": "search for employees by ID number",
                 "tags": ["employees"],
@@ -341,7 +341,7 @@
                 }
             }
         },
-        "/employees/new/employee": {
+        "/api/v1/employees/new/employee": {
             "post": {
                 "summary": "add a new employee",
                 "tags": ["employees"],
@@ -393,7 +393,7 @@
                 }
             }
         },
-        "/employees/update/id/{employee_id}": {
+        "/api/v1/employees/update/id/{employee_id}": {
             "put": {
                 "summary": "update employee by id",
                 "tags": ["employees"],
@@ -453,7 +453,7 @@
                 }
             }
         },
-        "/employees/update/idenntification/{identification_number}": {
+        "/api/v1/employees/update/idenntification/{identification_number}": {
             "put": {
                 "summary": "update employee by ID number",
                 "tags": ["employees"],
@@ -514,7 +514,7 @@
                 }
             }
         },
-        "/employees/delete/id/{employee_id}": {
+        "/api/v1/employees/delete/id/{employee_id}": {
             "delete": {
                 "summary": "delete user by id",
                 "tags": ["employees"],
@@ -536,7 +536,7 @@
                 }
             }
         },
-        "/employees/delete/idenntification/{identification_number}": {
+        "/api/v1/employees/delete/idenntification/{identification_number}": {
             "delete": {
                 "summary": "delete employee by ID number",
                 "tags": ["employees"],
@@ -558,7 +558,7 @@
                 }
             }
         },
-        "/course": {
+        "/api/v1/course": {
             "get": {
                 "summary": "search all courses",
                 "tags": ["courses"],
@@ -572,7 +572,7 @@
                 }
             }
         },
-        "/course/id/{course_id}": {
+        "/api/v1/course/id/{course_id}": {
             "get": {
                 "summary": "search course by id",
                 "tags": ["courses"],
@@ -594,7 +594,7 @@
                 }
             }
         },
-        "/course/title/{title}": {
+        "/api/v1/course/title/{title}": {
             "get": {
                 "summary": "search for courses by title",
                 "tags": ["courses"],
@@ -616,7 +616,7 @@
                 }
             }
         },
-        "/course/create": {
+        "/api/v1/course/create": {
             "post": {
                 "summary": "create new course",
                 "tags": ["courses"],
@@ -664,7 +664,7 @@
                 }
             }
         },
-        "/course/update/{course_id}": {
+        "/api/v1/course/update/{course_id}": {
             "put": {
                 "summary": "edit course by id",
                 "tags": ["courses"],
@@ -720,7 +720,7 @@
                 }
             }
         },
-        "/course/delete/id/{course_id}": {
+        "/api/v1/course/delete/id/{course_id}": {
             "delete": {
                 "summary": "delete course by id",
                 "tags": ["courses"],
@@ -742,7 +742,7 @@
                 }
             }
         },
-        "/course/delete/title/{title}": {
+        "/api/v1/course/delete/title/{title}": {
             "delete": {
                 "summary": "delete course by title",
                 "tags": ["courses"],
@@ -764,7 +764,7 @@
                 }
             }
         },
-        "/course/personalized": {
+        "/api/v1/course/personalized": {
             "get": {
                 "summary": "search all custom courses",
                 "tags": ["courses personalized"],
@@ -778,7 +778,7 @@
                 }
             }
         },
-        "/course/personalized/id/{id}": {
+        "/api/v1/course/personalized/id/{id}": {
             "get": {
                 "summary": "Search custom course by id",
                 "tags": ["courses personalized"],
@@ -800,7 +800,7 @@
                 }
             }
         },
-        "/course/personalized/title/{title}": {
+        "/api/v1/course/personalized/title/{title}": {
             "get": {
                 "summary": "search for a custom course by title",
                 "tags": ["courses personalized"],
@@ -822,7 +822,7 @@
                 }
             }
         },
-        "/course/personalized/new": {
+        "/api/v1/course/personalized/new": {
             "post": {
                 "summary": "create a new custom course",
                 "tags": ["courses personalized"],
@@ -874,7 +874,7 @@
                 }
             }
         },
-        "/course/personalized/update/{coursep_id}": {
+        "/api/v1/course/personalized/update/{coursep_id}": {
             "post": {
                 "summary": "update course by id",
                 "tags": ["courses personalized"],
@@ -934,7 +934,7 @@
                 }
             }
         },
-        "/course/personalized/delete/id/:coursep_id": {
+        "/api/v1/course/personalized/delete/id/:coursep_id": {
             "delete": {
                 "summary": "delete custom course by id",
                 "tags": ["courses personalized"],
@@ -956,7 +956,7 @@
                 }
             }
         },
-        "/course/personalized/delete/title/{title}": {
+        "/api/v1/course/personalized/delete/title/{title}": {
             "delete": {
                 "summary": "delete custom course by title",
                 "tags": ["courses personalized"],
@@ -978,7 +978,7 @@
                 }
             }
         },
-        "/registrantion/": {
+        "/api/v1/registrantion/": {
             "get": {
                 "summary": "search all course records",
                 "tags": ["registrantions"],
@@ -992,7 +992,7 @@
                 }
             }
         },
-        "/registrantion/id/{registrantion_id}": {
+        "/api/v1/registrantion/id/{registrantion_id}": {
             "get": {
                 "summary": "search record by id",
                 "tags": ["registrantions"],
@@ -1014,7 +1014,7 @@
                 }
             }
         },
-        "/registrantion/new": {
+        "/api/v1/registrantion/new": {
             "post": {
                 "summary": "create new record",
                 "tags": ["registrantions"],
@@ -1062,108 +1062,7 @@
                 }
             }
         },
-        "/registrantion/update/all/{registration_id}": {
-            "put": {
-                "summary": "edit record",
-                "tags": ["registrantions"],
-                "parameters": [{
-                    "name": "registration_id",
-                    "in": "path",
-                    "required": true,
-                    "schema": {
-                        "type": "integer"
-                    }
-                }],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "employee_id": {
-                                        "type": "integer"
-                                    },
-                                    "start_date": {
-                                        "type": "string"
-                                    },
-                                    "end_date": {
-                                        "type": "string"
-                                    },
-                                    "coursep_id": {
-                                        "type": "string"
-                                    },
-                                    "course_id": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "required": [
-                                    "employee_id",
-                                    "star_date",
-                                    "end_date",
-                                    "coursep_id",
-                                    "course_id"
-                                ]
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "the record was updated successfully"
-                    },
-                    "304": {
-                        "description": "error updating entire record"
-                    }
-                }
-            }
-        },
-        "/registrantion/update/{regsitrantion_id}": {
-            "put": {
-                "summary": "update record (start date) (end date)",
-                "tags": ["registrantions"],
-                "parameters": [{
-                    "name": "registration_id",
-                    "in": "path",
-                    "required": true,
-                    "schema": {
-                        "type":"integer"
-                    }
-                }],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type":"object",
-                                "properties": {
-                                    "start_date": {
-                                        "type": "string"
-                                    },
-                                    "end_date": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": [
-                                    "star_date",
-                                    "end_date"
-                                ]
-                            }
-                        }
-                    }
-                    
-                },
-                "responses": {
-                    "200": {
-                        "description": "the record was updated successfully, (start date) (end date)"
-                    },
-                    "304": {
-                        "description": "error updating record, (start date) (end date)"
-                    }
-                }
-            }
-        },
-        "/registrantion/delete/{registration_id}": {
+        "/api/v1/registrantion/delete/{registration_id}": {
             "delete": {
                 "summary": "delete record",
                 "tags": ["registrantions"],

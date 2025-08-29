@@ -115,7 +115,7 @@ export const viewsPutEmployeesByIdentification = async (req, res) => {
         const data = await employeeByIdPUT(full_name, newIdentification, phone, charge_id, company_id, user_id, identification_number)
         res.status(200).json(data)
     } catch (error) {
-        console.error( error.message);
+        console.error(error.message);
         res.status(404).json({
             message: 'No se pudo actualizar el cliente',
             error: error.message
@@ -130,7 +130,7 @@ export const viewsDeleteEmployees = async (req, res) => {
         const doAwayEmployee = await deleteEmployee(id) 
         res.status(200).json(doAwayEmployee);
     } catch (error) {
-        console.error( error.message);
+        console.error(error.message);
         res.status(404).json({
             message: 'Error al eliminar empleado',
             error: error.message
