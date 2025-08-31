@@ -9,7 +9,8 @@ import {
     deleteUser,
     deleteByEmail,
     loginUser,
-    updateUserEmail
+    updateUserEmail,
+    createUserAdmin
 } from "../services/userService.js";
 
 export const login = async (req, res) => {
@@ -22,11 +23,14 @@ export const login = async (req, res) => {
         res.status(200).json({
             message: 'Login exitoso', token,
             user: {
-                email: user.email
+                id: user.user_id,
+                email: user.email,
+                id_role: user.role_id,
+                role: user.name_role,
             }
         })
     } catch (error) {
-        console.error('Error al logiarse:', error.message);
+        console.error(error.message);
         res.status(401).json({
             message: 'No se puedo autorizar el inicio de sesion, vuelva a intentarlo mas tarde....',
             error: error.message
@@ -42,7 +46,7 @@ export const showGetAllUser = async (req, res) => {
         const user = await searchAllUsers()
         res.status(200).json(user)
     } catch (error) {
-        console.error('Error getting all users:', error.message)
+        console.error(error.message)
 
         res.status(500).json({
             message: 'Error getting all users',
@@ -59,7 +63,7 @@ export const showGetUserId = async (req, res) => {
         const userId = await searchUserId(user_id)
         res.status(200).json(userId)
     } catch (error) {
-        console.error('Error getting user by id', error.message);
+        console.error(error.message);
         res.status(500).json({
             message: 'Error getting user',
             error: error.message
@@ -75,7 +79,7 @@ export const showGetUserEmail = async (req, res) => {
         const userEmail = await searchUserEmail(email);
         res.status(200).json(userEmail)
     } catch (error) {
-        console.error('Error getting user by email:', error.message);
+        console.error(error.message);
 
         res.status(500).json({
             message: 'Error getting email',
@@ -99,7 +103,7 @@ export const showCreateUser = async (req, res) => {
         res.status(201).json(create)
 
     } catch (error) {
-        console.error('Error creating user:', error.message);
+        console.error(error.message);
         res.status(500).json({
             message: 'Error creating user',
             error: error.message
@@ -107,6 +111,27 @@ export const showCreateUser = async (req, res) => {
     }
 };
 
+export const showCreateUserAdmin = async (req, res) => {
+    try {
+        const { 
+            username,
+            email,
+            password,
+            role_id
+        } = req.body
+        
+        const passwordHash = await bcrypt.hash(password, 10)
+        const create = await createUserAdmin(username, email, passwordHash, role_id)
+        res.status(201).json(create)
+
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({
+            message: 'Error creating user',
+            error: error.message
+        })
+    }
+};
 
 
 export const showUpdateUserEmail = async (req, res) => {
@@ -121,7 +146,7 @@ export const showUpdateUserEmail = async (req, res) => {
         const data = await updateUserEmail(username, newEmail, passwordHash, email)
         res.status(202).json(data)
     } catch (error) {
-        console.error('Error al actualizar por email');
+        console.error(error.message);
         res.status(404).json({
             message: 'Error al actualizar datos del usuario',
             error: error.message
@@ -143,7 +168,7 @@ export const showUpdateUser = async (req, res) => {
         const updateUserId = await updateUser(username, email, passwordHash, user_id)
         res.status(202).json(updateUserId)
     } catch (error) {
-        console.error('Error updating user:', error.message);
+        console.error(error.message);
         
         res.status(404).json({
             message: 'Error updating user',
@@ -160,7 +185,7 @@ export const showDeleteUserId = async (req, res) => {
         const userId = await deleteUser(user_id)
         res.status(200).json(userId)
     } catch (error) {
-        console.error('Error deleting user by id: ', error.message);
+        console.error(error.message);
         
         res.status(404).json({
             message: 'Error deleting user by id',
@@ -179,7 +204,7 @@ export const showDeleteUserEmail = async (req, res) => {
         
         res.status(200).json(userEmail)
     } catch (error) {
-        console.error('Error deleting user by email: ', error.message);
+        console.error(error.message);
         
         res.status(404).json({
             message: 'Error deleting user by email',

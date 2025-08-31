@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding - Plataforma de Educación Corporativa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .animate-slideInLeft {
+            animation: slideInLeft 0.3s ease-out forwards;
+        }
+
+        .chart-bar {
+            transition: height 1s ease-out;
+        }
+
+        .hover-scale:hover {
+            transform: scale(1.02);
+        }
+
+        .progress-ring {
+            transition: stroke-dasharray 1s ease-out;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="fixed inset-0 bg-white z-50 flex items-center justify-center">
+        <div class="text-center">
+            <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <h2 class="text-xl font-semibold text-gray-900">Cargando Onboarding...</h2>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="mainApp" class="hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar"
+            class="fixed left-0 top-0 h-full w-64 bg-white shadow-lg z-30 transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
+            <div class="flex items-center justify-between h-16 px-6 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                        <i data-lucide="book-open" class="h-5 w-5 text-white"></i>
+                    </div>
+                    <span class="text-xl font-bold text-gray-900">Onboarding</span>
+                </div>
+                <button id="closeSidebar" class="lg:hidden text-gray-500 hover:text-gray-700">
+                    <i data-lucide="x" class="h-5 w-5"></i>
+                </button>
+            </div>
+
+            <nav class="mt-8">
+                <button data-section="home"
+                    class="nav-item w-full flex items-center px-6 py-3 text-left text-sm font-medium transition-colors duration-150 text-blue-600 bg-blue-50 border-r-2 border-blue-600">
+                    <i data-lucide="home" class="mr-3 h-5 w-5"></i>
+                    Home
+                </button>
+                <button data-section="dashboard"
+                    class="nav-item w-full flex items-center px-6 py-3 text-left text-sm font-medium transition-colors duration-150 text-blue-600 bg-blue-50 border-r-2 border-blue-600 hover:bg-gray-50">
+                    <i data-lucide="chart-no-axes-combined" class="mr-3 h-5 w-5"></i>
+                    Dashboard
+                </button>
+                <button data-section="courses"
+                    class="nav-item w-full flex items-center px-6 py-3 text-left text-sm font-medium transition-colors duration-150 text-gray-700 hover:text-blue-600 hover:bg-gray-50">
+                    <i data-lucide="book-open" class="mr-3 h-5 w-5"></i>
+                    Courses
+                </button>
+                <button data-section="reports"
+                    class="nav-item w-full flex items-center px-6 py-3 text-left text-sm font-medium transition-colors duration-150 text-gray-700 hover:text-blue-600 hover:bg-gray-50">
+                    <i data-lucide="pie-chart" class="mr-3 h-5 w-5"></i>
+                    Reports
+                </button>
+                <button data-section="documents"
+                    class="nav-item w-full flex items-center px-6 py-3 text-left text-sm font-medium transition-colors duration-150 text-gray-700 hover:text-blue-600 hover:bg-gray-50">
+                    <i data-lucide="folder" class="mr-3 h-5 w-5"></i>
+                    Documents
+                </button>
+                <button data-section="profile"
+                    class="nav-item w-full flex items-center px-6 py-3 text-left text-sm font-medium transition-colors duration-150 text-gray-700 hover:text-blue-600 hover:bg-gray-50">
+                    <i data-lucide="user" class="mr-3 h-5 w-5"></i>
+                    Profile
+                </button>
+            </nav>
+
+            <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200">
+                <div class="flex items-center space-x-3">
+                    <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150"
+                        alt="Usuario" class="h-8 w-8 rounded-full object-cover">
+                    <div class="flex-1 min-w-0">
+                        <p id="userFullName" class="text-sm font-medium text-gray-900 truncate">
+                            María González
+                        </p>
+                        <p class="text-xs text-gray-500 truncate">
+                            Coordinadora RRHH
+                        </p>
+                    </div>
+                    <button id="logoutBtn" class="text-gray-400 hover:text-gray-600">
+                        <i data-lucide="log-out" class="h-4 w-4"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+
+        <!-- Overlay for mobile -->
+        <div id="sidebarOverlay" class="lg:hidden fixed inset-0 z-20 bg-black bg-opacity-50 hidden"></div>
+
+        <!-- Main Content -->
+        <div class="lg:ml-64">
+            <!-- Header -->
+            <header class="bg-white shadow-sm border-b border-gray-200">
+                <div class="flex items-center justify-between h-16 px-6">
+                    <div class="flex items-center space-x-4">
+                        <button id="openSidebar" class="lg:hidden text-gray-500 hover:text-gray-700">
+                            <i data-lucide="menu" class="h-5 w-5"></i>
+                        </button>
+                        <div class="relative">
+                            <i data-lucide="search"
+                                class="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"></i>
+                            <input type="text" placeholder="Buscar cursos, empleados..."
+                                class="pl-10 pr-4 py-2 w-80 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-4">
+                        <button class="relative p-2 text-gray-400 hover:text-gray-600">
+                            <i data-lucide="bell" class="h-5 w-5"></i>
+                            <span
+                                class="absolute -top-1 -right-1 h-4 w-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
+                        </button>
+
+                        <div class="flex items-center space-x-3">
+                            <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150"
+                                alt="Usuario" class="h-8 w-8 rounded-full object-cover">
+                            <div class="hidden sm:block">
+                                <p class="text-sm font-medium text-gray-900">María González</p>
+                                <p class="text-xs text-gray-500">Recursos Humanos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+
+            <!-- Reports Content -->
+            <div id="reportsContent" class="section-content hidden">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900 mb-2">Reportes y Métricas</h1>
+                        <p class="text-gray-600">Análisis detallado del rendimiento y progreso de capacitaciones</p>
+                    </div>
+                    <button id="exportReportBtn"
+                        class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors flex items-center space-x-2">
+                        <i data-lucide="download" class="h-5 w-5"></i>
+                        <span>Exportar Reporte</span>
+                    </button>
+                </div>
+
+                <!-- Report filters -->
+                <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                    <div
+                        class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 lg:space-x-4">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="filter" class="h-5 w-5 text-gray-400"></i>
+                            <span class="text-sm font-medium text-gray-700">Filtros:</span>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                            <div class="flex items-center space-x-2">
+                                <i data-lucide="calendar" class="h-5 w-5 text-gray-400"></i>
+                                <select id="periodFilter"
+                                    class="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <option value="week">Esta semana</option>
+                                    <option value="month" selected>Este mes</option>
+                                    <option value="quarter">Este trimestre</option>
+                                    <option value="year">Este año</option>
+                                </select>
+                            </div>
+
+                            <select id="reportDepartmentFilter"
+                                class="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="all">Todos los departamentos</option>
+                                <option value="rrhh">Recursos Humanos</option>
+                                <option value="ventas">Ventas</option>
+                                <option value="sistemas">Sistemas</option>
+                                <option value="finanzas">Finanzas</option>
+                                <option value="marketing">Marketing</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reports Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <div class="flex items-center justify-between">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <i data-lucide="users" class="h-6 w-6 text-blue-600"></i>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <i data-lucide="trending-up" class="h-4 w-4 text-green-500"></i>
+                                <span class="text-sm font-medium text-green-500">+18%</span>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="text-2xl font-bold text-gray-900">234</h3>
+                            <p class="text-sm text-gray-600 mt-1">Empleados Capacitados</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <div class="flex items-center justify-between">
+                            <div class="bg-green-50 p-3 rounded-lg">
+                                <i data-lucide="check-circle" class="h-6 w-6 text-green-600"></i>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <i data-lucide="trending-up" class="h-4 w-4 text-green-500"></i>
+                                <span class="text-sm font-medium text-green-500">+25%</span>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="text-2xl font-bold text-gray-900">1,247</h3>
+                            <p class="text-sm text-gray-600 mt-1">Cursos Completados</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <div class="flex items-center justify-between">
+                            <div class="bg-purple-50 p-3 rounded-lg">
+                                <i data-lucide="clock" class="h-6 w-6 text-purple-600"></i>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <i data-lucide="trending-up" class="h-4 w-4 text-green-500"></i>
+                                <span class="text-sm font-medium text-green-500">+12%</span>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="text-2xl font-bold text-gray-900">3,456h</h3>
+                            <p class="text-sm text-gray-600 mt-1">Tiempo Total Invertido</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <div class="flex items-center justify-between">
+                            <div class="bg-orange-50 p-3 rounded-lg">
+                                <i data-lucide="target" class="h-6 w-6 text-orange-600"></i>
+                            </div>
+                            <div class="flex items-center space-x-1">
+                                <i data-lucide="trending-up" class="h-4 w-4 text-green-500"></i>
+                                <span class="text-sm font-medium text-green-500">+5.2%</span>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h3 class="text-2xl font-bold text-gray-900">87.5%</h3>
+                            <p class="text-sm text-gray-600 mt-1">Tasa de Finalización</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Employee Reports Table -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-gray-900 flex items-center">
+                            <i data-lucide="users" class="h-5 w-5 text-blue-500 mr-2"></i>
+                            Reporte Individual de Empleados
+                        </h3>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-gray-200">
+                                    <th class="text-left py-3 px-4 font-medium text-gray-500">Empleado</th>
+                                    <th class="text-left py-3 px-4 font-medium text-gray-500">Departamento</th>
+                                    <th class="text-left py-3 px-4 font-medium text-gray-500">Cursos</th>
+                                    <th class="text-left py-3 px-4 font-medium text-gray-500">Completados</th>
+                                    <th class="text-left py-3 px-4 font-medium text-gray-500">Progreso</th>
+                                    <th class="text-left py-3 px-4 font-medium text-gray-500">Horas</th>
+                                    <th class="text-left py-3 px-4 font-medium text-gray-500">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="employeeReportsTable">
+                                <!-- Employee data will be generated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+            <script type="module" src="../js/ui.js"></script>
+            <script type="module" src="../js/auth.js"></script>
+</body>
+
+</html>

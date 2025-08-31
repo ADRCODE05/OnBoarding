@@ -9,14 +9,14 @@ import {
     putUserid,
     deleteUserId,
     deleteUserEmail,
-    confirmUser,
-    putUserEmail
+    putUserEmail,
+    getUsersEmailLogin
 } from "../models/userQueries.js";
 
 
 
 export const loginUser = async (email, password) => {
-    const user = await getUsersEmail(email.toLowerCase())
+    const user = await getUsersEmailLogin(email.toLowerCase())
     if(!user) {
         throw new Error('Credenciales invalidas')
     }
@@ -25,10 +25,11 @@ export const loginUser = async (email, password) => {
     if(!data) {
         throw new Error('Credenciales invalidas')
     }
-    const token = await crearToken({
-        id: user.user_id,
+    const token = crearToken({
+        id: user.user_user_id,
         email: user.email,
-        id_role: user.role_id
+        id_role: user.role_id,
+        name_role: user.name_role
     })
     delete user.password
     return  { token, user }
@@ -87,6 +88,25 @@ export const createUser = async (username, email, password) => {
     const defaultRole = 3;
     
     const data = await postUser(username, email, password, defaultRole)
+    
+    if(!data || !data.user_id) {
+        throw new Error('ERROR DE NUEVO')
+    }
+    return data
+};
+
+
+export const createUserAdmin = async (username, email, password, role_id) => {
+    role_id = Number(role_id)
+    if(!username || !email || !password || !role_id) {
+        throw new Error('Required fields')
+    }
+
+    if(isNaN(role_id)) {
+        throw new Error('the id must be a valid number')
+    }
+    
+    const data = await postUser(username, email, password, role_id)
     
     if(!data || !data.user_id) {
         throw new Error('ERROR DE NUEVO')

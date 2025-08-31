@@ -1,6 +1,6 @@
 import { validarToken } from "../utils/jwt.js";
 
-export const authMiddleware =    (req, res, next) => {
+export const authMiddleware =  (req, res, next) => {
     const AuthHeaders = req.headers['authorization']
     if(!AuthHeaders) {
         return res.status(401).json({
@@ -22,7 +22,7 @@ export const authMiddleware =    (req, res, next) => {
 }
 
 
-export const authRol = async (rolAsignado) => {
+export const authRol = (rolAsignado) => {
     return (req, res, next) => {
         if(!req.user) {
             return res.status(401).json({

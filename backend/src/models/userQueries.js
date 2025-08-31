@@ -2,6 +2,20 @@ import { pool } from '../../db/db.js'
 
 
 // GET
+export const getUsersEmailLogin = async (email) => {
+    const query = `
+        SELECT u.user_id, u.email, u.password, u.role_id, r.name_role
+        FROM users u
+        INNER JOIN roles r ON u.role_id = r.role_id
+        WHERE u.email = $1
+    `;
+    const values = [email];
+    const result = await pool.query(query, values);
+    return result.rows[0];
+};
+
+
+
 export const getUsers = async () => {
     const result = await pool.query(`SELECT * FROM users`)
     return result.rows
@@ -27,6 +41,8 @@ export const getUsersEmail = async (email) => {
 
 
 
+
+
 // POST
 export const postUser = async (username, email, password, role_id) => {
     const query = (`INSERT INTO users (username, email, password, role_id)
@@ -49,6 +65,8 @@ export const putUserid = async (username, email, password, user_id) => {
     const result = await pool.query(query, values)
     return result.rows[0];
 };
+
+
 
 
 export const putUserEmail = async (username, newEmail, password, email) => {
