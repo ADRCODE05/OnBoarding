@@ -18,7 +18,7 @@ export const getUsersEmailLogin = async (email) => {
 
 export const getMe = async (userId) => {
     const query = (`
-        SELECT u.user_id, u.email, u.role_id, r.name_role, u.username
+        SELECT u.user_id, u.email, u.role_id, r.name_role AS role, u.username
         FROM users u
         INNER JOIN roles r ON u.role_id = r.role_id
         WHERE u.user_id = $1

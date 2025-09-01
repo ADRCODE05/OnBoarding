@@ -21,6 +21,8 @@ async function loadCourses() {
       $$(".userFullName").forEach(el => el.textContent = user.username || "Usuario");
       $$(".roleFullName").forEach(el => el.textContent = user.role || "Desconocido"); 
   }
+
+  
     const res = await fetch(API("/courses"), {
       headers: { Authorization: `Bearer ${getToken()}` },
     });

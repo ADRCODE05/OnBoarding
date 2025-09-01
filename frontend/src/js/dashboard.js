@@ -16,11 +16,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Mostrar dashboard
     showApp(true);
 
-    // Logout
-    const logoutBtn = document.querySelector('#logoutBtn');
-    if(logoutBtn) logoutBtn.addEventListener('click', logout);
-    
-
     // Cargar cursos
     const courseForm = document.querySelector('#courseForm');
     if (courseForm) {
