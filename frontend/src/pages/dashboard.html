@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Onboarding - Plataforma de Educación Corporativa</title>
+    <title>Onboarding - Corporate Education Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
@@ -59,7 +59,7 @@
     <div id="loadingScreen" class="fixed inset-0 bg-white z-50 flex items-center justify-center">
         <div class="text-center">
             <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <h2 class="text-xl font-semibold text-gray-900">Cargando Onboarding...</h2>
+            <h2 class="text-xl font-semibold text-gray-900">Loading Onboarding...</h2>
         </div>
     </div>
 
@@ -178,7 +178,7 @@
                             María González
                         </p>
                         <p class="roleFullName" class="text-xs text-gray-500 truncate">
-                            Coordinadora RRHH
+                            HR Coordinator
                         </p>
                     </div>
                     <button id="logoutBtn" class="text-gray-400 hover:text-gray-600">
@@ -221,7 +221,7 @@
                                 alt="Usuario" class="h-8 w-8 rounded-full object-cover">
                             <div class="hidden sm:block">
                                 <p class="userFullName text-sm font-medium text-gray-900">María González</p>
-                                <p class="roleFullName text-xs text-gray-500">Recursos Humanos</p>
+                                <p class="roleFullName text-xs text-gray-500">Human Resources</p>
                             </div>
                         </div>
                     </div>
@@ -234,8 +234,8 @@
                 <!-- Dashboard Content -->
                 <div id="dashboardContent" class="section-content">
                     <div class="mb-8">
-                        <h1 class="text-3xl font-bold text-gray-900 mb-2">Panel de Control</h1>
-                        <p class="text-gray-600">Resumen general de la actividad de capacitación corporativa</p>
+                        <h1 class="text-3xl font-bold text-gray-900 mb-2">Control Panel</h1>
+                        <p class="text-gray-600">Overview of the corporate training activity</p>
                     </div>
 
                     <!-- Stats Grid -->
@@ -252,7 +252,7 @@
                             </div>
                             <div class="mt-4">
                                 <h3 class="text-2xl font-bold text-gray-900" id="totalEmployees">15</h3>
-                                <p class="text-sm text-gray-600 mt-1">Empleados Activos</p>
+                                <p class="text-sm text-gray-600 mt-1">Active Employees</p>
                             </div>
                         </div>
 
@@ -263,12 +263,12 @@
                                 </div>
                                 <div class="flex items-center space-x-1">
                                     <i data-lucide="trending-up" class="h-4 w-4 text-green-500"></i>
-                                    <span class="text-sm font-medium text-green-500">+4 nuevos</span>
+                                    <span class="text-sm font-medium text-green-500">+4 new</span>
                                 </div>
                             </div>
                             <div class="mt-4">
                                 <h3 class="text-2xl font-bold text-gray-900" id="activeCourses">4</h3>
-                                <p class="text-sm text-gray-600 mt-1">Cursos Disponibles</p>
+                                <p class="text-sm text-gray-600 mt-1">Available Courses</p>
                             </div>
                         </div>
 
@@ -284,7 +284,7 @@
                             </div>
                             <div class="mt-4">
                                 <h3 class="text-2xl font-bold text-gray-900" id="completionRate">47.5%</h3>
-                                <p class="text-sm text-gray-600 mt-1">Tasa de Completado</p>
+                                <p class="text-sm text-gray-600 mt-1">Completion Rate</p>
                             </div>
                         </div>
 
@@ -300,7 +300,7 @@
                             </div>
                             <div class="mt-4">
                                 <h3 class="text-2xl font-bold text-gray-900" id="avgTime">4.2h</h3>
-                                <p class="text-sm text-gray-600 mt-1">Tiempo Promedio</p>
+                                <p class="text-sm text-gray-600 mt-1">Average Time</p>
                             </div>
                         </div>
                     </div>
@@ -312,20 +312,20 @@
                             <div class="flex items-center justify-between mb-6">
                                 <h3 class="text-lg font-semibold text-gray-900 flex items-center">
                                     <i data-lucide="bar-chart-3" class="h-5 w-5 text-blue-500 mr-2"></i>
-                                    Progreso de Capacitaciones
+                                    Training Progress
                                 </h3>
                                 <div class="flex items-center space-x-4 text-sm">
                                     <div class="flex items-center space-x-2">
                                         <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                                        <span class="text-gray-600">Completados</span>
+                                        <span class="text-gray-600">Completed</span>
                                     </div>
                                     <div class="flex items-center space-x-2">
                                         <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
-                                        <span class="text-gray-600">En Progreso</span>
+                                        <span class="text-gray-600">In Progress</span>
                                     </div>
                                     <div class="flex items-center space-x-2">
                                         <div class="w-3 h-3 bg-gray-300 rounded-full"></div>
-                                        <span class="text-gray-600">Pendientes</span>
+                                        <span class="text-gray-600">Pending</span>
                                     </div>
                                 </div>
                             </div>
@@ -365,7 +365,7 @@
                             <div class="flex items-center justify-between mb-6">
                                 <h3 class="text-lg font-semibold text-gray-900 flex items-center">
                                     <i data-lucide="activity" class="h-5 w-5 text-blue-500 mr-2"></i>
-                                    Actividad Reciente
+                                    Recent Activity
                                 </h3>
                             </div>
                         
@@ -376,9 +376,9 @@
                                         <i data-lucide="book-open" class="h-4 w-4"></i>
                                     </div>
                                     <div>
-                                        <p class="text-sm text-gray-900"><span class="font-semibold">Juan Pérez</span> completó el curso <span
-                                                class="font-medium">"Induccion de nuevos empleados"</span></p>
-                                        <p class="text-xs text-gray-500">Hace 2 horas</p>
+                                        <p class="text-sm text-gray-900"><span class="font-semibold">Juan Pérez</span> completed the course <span
+                                                class="font-medium">"Induction of new employees"</span></p>
+                                        <p class="text-xs text-gray-500">2 hours ago</p>
                                     </div>
                                 </div>
                         
@@ -387,9 +387,8 @@
                                         <i data-lucide="user-plus" class="h-4 w-4"></i>
                                     </div>
                                     <div>
-                                        <p class="text-sm text-gray-900"><span class="font-semibold">María González</span> se unió a la
-                                            plataforma</p>
-                                        <p class="text-xs text-gray-500">Hace 5 horas</p>
+                                        <p class="text-sm text-gray-900"><span class="font-semibold">María González</span> joined the platform </p>
+                                        <p class="text-xs text-gray-500">5 hours ago</p>
                                     </div>
                                 </div>
                         
@@ -398,9 +397,9 @@
                                         <i data-lucide="clock" class="h-4 w-4"></i>
                                     </div>
                                     <div>
-                                        <p class="text-sm text-gray-900"><span class="font-semibold">Carlos Ramírez</span> inició el curso <span
-                                                class="font-medium">"Manejo de sistema ERP"</span></p>
-                                        <p class="text-xs text-gray-500">Ayer</p>
+                                        <p class="text-sm text-gray-900"><span class="font-semibold">Carlos Ramírez</span> the course began <span
+                                                class="font-medium">"ERP system management"</span></p>
+                                        <p class="text-xs text-gray-500">Yesterday</p>
                                     </div>
                                 </div>
                         
@@ -410,9 +409,9 @@
                                         <i data-lucide="star" class="h-4 w-4"></i>
                                     </div>
                                     <div>
-                                        <p class="text-sm text-gray-900"><span class="font-semibold">Laura Torres</span> obtuvo una insignia por
-                                            <span class="font-medium">"Excelencia Académica"</span></p>
-                                        <p class="text-xs text-gray-500">Hace 1 día</p>
+                                        <p class="text-sm text-gray-900"><span class="font-semibold">Laura Torres</span> earned a badge for
+                                            <span class="font-medium">"Academic Excellence"</span></p>
+                                        <p class="text-xs text-gray-500">1 day ago</p>
                                     </div>
                                 </div>
                         
@@ -422,9 +421,8 @@
                                         <i data-lucide="alert-circle" class="h-4 w-4"></i>
                                     </div>
                                     <div>
-                                        <p class="text-sm text-gray-900"><span class="font-semibold">Pedro López</span> tuvo un problema al
-                                            acceder a la capacitacion <span class="font-medium">"Normativa de calidad ISO 9001"</span></p>
-                                        <p class="text-xs text-gray-500">Hace 2 días</p>
+                                        <p class="text-sm text-gray-900"><span class="font-semibold">Pedro López</span> had a problem accessing the training <span class="font-medium">"Normativa de calidad ISO 9001"</span></p>
+                                        <p class="text-xs text-gray-500">2 days ago</p>
                                     </div>
                                 </div>
                         
@@ -434,16 +432,16 @@
                                         <i data-lucide="message-circle" class="h-4 w-4"></i>
                                     </div>
                                     <div>
-                                        <p class="text-sm text-gray-900"><span class="font-semibold">Ana Morales</span> dejó un comentario en el
-                                            curso <span class="font-medium">"Induccion a nuevos empleados"</span></p>
-                                        <p class="text-xs text-gray-500">Hace 3 días</p>
+                                        <p class="text-sm text-gray-900"><span class="font-semibold">Ana Morales</span> left a comment on the
+                                            course <span class="font-medium">"Induction of new employees"</span></p>
+                                        <p class="text-xs text-gray-500">3 days ago</p>
                                     </div>
                                 </div>
                             </div>
                         
                             <!-- Ver más -->
                             <div class="mt-4 text-center">
-                                <a href="#" class="text-sm text-blue-600 hover:underline">Ver más</a>
+                                <a href="#" class="text-sm text-blue-600 hover:underline">See more</a>
                             </div>
                         </div>
 
