@@ -1,0 +1,15 @@
+const API = path => `/api/v1${path}`;
+
+function saveToken(t) { localStorage.setItem('token', t); }
+function saveRole(r) { localStorage.setItem('role', r); }
+function getToken() { return localStorage.getItem('token'); }
+function getRole() { return localStorage.getItem('role'); }
+
+
+function logout() { 
+  localStorage.removeItem('token'); 
+  localStorage.removeItem('role')
+  window.location.href = '../../index.html';
+}
+
+export { saveToken, getToken, saveRole, getRole, logout, API };

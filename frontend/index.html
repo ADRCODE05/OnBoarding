@@ -1,13 +1,132 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding - Plataforma de Educación Corporativa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .animate-slideInLeft {
+            animation: slideInLeft 0.3s ease-out forwards;
+        }
+
+        .chart-bar {
+            transition: height 1s ease-out;
+        }
+
+        .hover-scale:hover {
+            transform: scale(1.02);
+        }
+
+        .progress-ring {
+            transition: stroke-dasharray 1s ease-out;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="fixed inset-0 bg-white z-50 flex items-center justify-center">
+        <div class="text-center">
+            <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <h2 class="text-xl font-semibold text-gray-900">Cargando Onboarding...</h2>
+        </div>
+    </div>
+
+    <!-- Login Screen -->
+    <div id="loginScreen" class="hidden fixed inset-0 bg-gradient-to-br from-blue-50 via-white to-blue-50 z-40">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="w-full max-w-md">
+                <div class="bg-white rounded-2xl shadow-xl p-8 animate-fadeInUp">
+                    <div class="text-center mb-8">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-4">
+                            <i data-lucide="book-open" class="h-8 w-8 text-white"></i>
+                        </div>
+                        <h1 class="text-3xl font-bold text-gray-900">Onboarding</h1>
+                        <p class="text-gray-500 mt-2">Corporate Education Platform</p>
+                    </div>
+
+                    <form id="loginForm" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Email
+                            </label>
+                            <input type="email" id="loginEmail" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                placeholder="tu@empresa.com">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Password
+                            </label>
+                            <div class="relative">
+                                <input type="password" id="loginPassword" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-12 transition-all"
+                                    placeholder="••••••••">
+                                <button type="button" id="togglePassword"
+                                    class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                    <i data-lucide="eye" class="h-5 w-5"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="loginButton"
+                            class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 transition-all font-medium">
+                            Login
+                        </button>
+                    </form>
+
+                    <div class="mt-8 pt-6 border-t border-gray-200">
+                        <div class="text-center text-sm text-gray-500">
+                            <p class="mb-2">Credenciales de demostración:</p>
+                            <p><strong>Email:</strong> hr@empresa.com</p>
+                            <p><strong>Password:</strong> cualquier contraseña</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8 text-sm text-gray-500">
+                    <p>© 2025 Onboarding Platform. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="module" src="./src/js/ui.js"></script>
+    <script type="module" src="./src/js/auth.js"></script>
+    <script type="module" src="./src/js/index.js"></script>
+</body>
+
 </html>
