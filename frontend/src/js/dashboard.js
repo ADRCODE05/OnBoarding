@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Cargar cursos
     const courseForm = document.querySelector('#courseForm');
     if (courseForm) {
-        const coursesModule = await import('../pages/courses.js');
+        const coursesModule = await import('./courses.js');
         coursesModule.loadCourses?.();
     }
 });

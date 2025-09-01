@@ -1,4 +1,4 @@
-const API = path => `/api/v1${path}`;
+const API = path => `http://localhost:4000/api/v1${path}`;
 
 function saveToken(t) { localStorage.setItem('token', t); }
 function saveRole(r) { localStorage.setItem('role', r); }

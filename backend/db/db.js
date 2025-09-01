@@ -11,7 +11,9 @@ export const pool = new Pool({
     port: process.env.DB_PORT,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    max: 10
+    ssl: {
+        rejectUnauthorized: false
+    }
 })
 
 const connectionDB = async () => {

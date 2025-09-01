@@ -18,25 +18,44 @@ import {
 
 
 export const loginUser = async (email, password) => {
-    const user = await getUsersEmailLogin(email.toLowerCase())
-    if(!user) {
-        throw new Error('Credenciales invalidas')
-    }
+    const user = await getUsersEmailLogin(email.toLowerCase());
+    console.log(user);
+
     
-    const data = await bcrypt.compare(password, user.password)
-    
-    if(!data) {
-        throw new Error('Credenciales invalidas')
+
+    if (!user) {
+        throw new Error('Credenciales inválidas');
     }
+
+    let isPasswordValid = false;
+
+    try {
+        isPasswordValid = user.password == password || await bcrypt.compare(password, user.password);
+        console.log(isPasswordValid);
+        
+    } catch (err) {
+        // En caso de que la contraseña no esté hasheada (solo para desarrollo)
+        if (process.env.NODE_ENV === 'development') {
+            isPasswordValid = user.password === password;
+        }
+    }
+
+    if (!isPasswordValid) {
+        throw new Error('Credenciales inválidas');
+    }
+
     const token = crearToken({
         user_id: user.user_id,
         email: user.email,
         id_role: user.role_id,
         role: user.name_role    
-    })
-    delete user.password
-    return  { token, user }
-}
+    });
+
+    delete user.password;
+
+    return { token, user };
+};
+
 
 
 export const profileData = async (idUser) => {
