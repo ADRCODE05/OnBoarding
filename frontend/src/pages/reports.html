@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Onboarding - Plataforma de Educación Corporativa</title>
+    <title>Onboarding - Corporate Education Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
@@ -59,7 +59,7 @@
     <div id="loadingScreen" class="fixed inset-0 bg-white z-50 flex items-center justify-center">
         <div class="text-center">
             <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <h2 class="text-xl font-semibold text-gray-900">Cargando Onboarding...</h2>
+            <h2 class="text-xl font-semibold text-gray-900">Loading Onboarding...</h2>
         </div>
     </div>
 
@@ -178,7 +178,7 @@
                             María González
                         </p>
                         <p class="roleFullName" class="text-xs text-gray-500 truncate">
-                            Coordinadora RRHH
+                            HR Coordinator
                         </p>
                     </div>
                     <button id="logoutBtn" class="text-gray-400 hover:text-gray-600">
@@ -204,7 +204,7 @@
                         <div class="relative">
                             <i data-lucide="search"
                                 class="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"></i>
-                            <input type="text" placeholder="Buscar cursos, empleados..."
+                            <input type="text" placeholder="Search for courses, employees..."
                                 class="pl-10 pr-4 py-2 w-80 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         </div>
                     </div>
@@ -221,7 +221,7 @@
                                 alt="Usuario" class="h-8 w-8 rounded-full object-cover">
                             <div class="hidden sm:block">
                                 <p class="userFullName" class="text-sm font-medium text-gray-900">María González</p>
-                                <p class="roleFullName" class="text-xs text-gray-500">Recursos Humanos</p>
+                                <p class="roleFullName" class="text-xs text-gray-500">HR Coordinator</p>
                             </div>
                         </div>
                     </div>
@@ -233,13 +233,13 @@
             <div id="reportsContent" class="section-content hidden">
                 <div class="flex items-center justify-between mb-8">
                     <div>
-                        <h1 class="text-3xl font-bold text-gray-900 mb-2">Reportes y Métricas</h1>
-                        <p class="text-gray-600">Análisis detallado del rendimiento y progreso de capacitaciones</p>
+                        <h1 class="text-3xl font-bold text-gray-900 mb-2">Reports and Metrics</h1>
+                        <p class="text-gray-600">Detailed analysis of training performance and progress</p>
                     </div>
                     <button id="exportReportBtn"
                         class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors flex items-center space-x-2">
                         <i data-lucide="download" class="h-5 w-5"></i>
-                        <span>Exportar Reporte</span>
+                        <span>Export Report</span>
                     </button>
                 </div>
 
@@ -249,7 +249,7 @@
                         class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0 lg:space-x-4">
                         <div class="flex items-center space-x-2">
                             <i data-lucide="filter" class="h-5 w-5 text-gray-400"></i>
-                            <span class="text-sm font-medium text-gray-700">Filtros:</span>
+                            <span class="text-sm font-medium text-gray-700">Filters:</span>
                         </div>
 
                         <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
@@ -257,20 +257,20 @@
                                 <i data-lucide="calendar" class="h-5 w-5 text-gray-400"></i>
                                 <select id="periodFilter"
                                     class="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                    <option value="week">Esta semana</option>
-                                    <option value="month" selected>Este mes</option>
-                                    <option value="quarter">Este trimestre</option>
-                                    <option value="year">Este año</option>
+                                    <option value="week">This week</option>
+                                    <option value="month" selected>This month</option>
+                                    <option value="quarter">This quarter</option>
+                                    <option value="year">This year</option>
                                 </select>
                             </div>
 
                             <select id="reportDepartmentFilter"
                                 class="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                <option value="all">Todos los departamentos</option>
-                                <option value="rrhh">Recursos Humanos</option>
-                                <option value="ventas">Ventas</option>
-                                <option value="sistemas">Sistemas</option>
-                                <option value="finanzas">Finanzas</option>
+                                <option value="all">All departments</option>
+                                <option value="rrhh">Human Resources</option>
+                                <option value="ventas">Sales</option>
+                                <option value="sistemas">Systems</option>
+                                <option value="finanzas">Finance</option>
                                 <option value="marketing">Marketing</option>
                             </select>
                         </div>
@@ -291,7 +291,7 @@
                         </div>
                         <div class="mt-4">
                             <h3 class="text-2xl font-bold text-gray-900">7</h3>
-                            <p class="text-sm text-gray-600 mt-1">Empleados Capacitados</p>
+                            <p class="text-sm text-gray-600 mt-1">Trained Employees</p>
                         </div>
                     </div>
 
@@ -307,7 +307,7 @@
                         </div>
                         <div class="mt-4">
                             <h3 class="text-2xl font-bold text-gray-900">2</h3>
-                            <p class="text-sm text-gray-600 mt-1">Cursos Completados</p>
+                            <p class="text-sm text-gray-600 mt-1">Completed Courses</p>
                         </div>
                     </div>
 
@@ -323,7 +323,7 @@
                         </div>
                         <div class="mt-4">
                             <h3 class="text-2xl font-bold text-gray-900">4,2h</h3>
-                            <p class="text-sm text-gray-600 mt-1">Tiempo Total Invertido</p>
+                            <p class="text-sm text-gray-600 mt-1">Total Time Invested</p>
                         </div>
                     </div>
 
@@ -339,7 +339,7 @@
                         </div>
                         <div class="mt-4">
                             <h3 class="text-2xl font-bold text-gray-900">42%</h3>
-                            <p class="text-sm text-gray-600 mt-1">Tasa de Finalización</p>
+                            <p class="text-sm text-gray-600 mt-1">Completion Rate</p>
                         </div>
                     </div>
                 </div>
@@ -349,7 +349,7 @@
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-lg font-semibold text-gray-900 flex items-center">
                             <i data-lucide="users" class="h-5 w-5 text-blue-500 mr-2"></i>
-                            Reporte Individual de Empleados
+                            Individual Employee Report
                         </h3>
                     </div>
 
@@ -357,11 +357,11 @@
                         <table class="w-full">
                             <thead>
                                 <tr class="border-b border-gray-200">
-                                    <th class="text-left py-3 px-4 font-medium text-gray-500">Empleado</th>
-                                    <th class="text-left py-3 px-4 font-medium text-gray-500">Cursos</th>
-                                    <th class="text-left py-3 px-4 font-medium text-gray-500">Completados</th>
-                                    <th class="text-left py-3 px-4 font-medium text-gray-500">Horas</th>
-                                    <th class="text-left py-3 px-4 font-medium text-gray-500">Estado</th>
+                                    <th class="text-left py-3 px-4 font-medium text-gray-500">Employee</th>
+                                    <th class="text-left py-3 px-4 font-medium text-gray-500">Courses</th>
+                                    <th class="text-left py-3 px-4 font-medium text-gray-500">Completed</th>
+                                    <th class="text-left py-3 px-4 font-medium text-gray-500">Hours</th>
+                                    <th class="text-left py-3 px-4 font-medium text-gray-500">State</th>
                                 </tr>
                             </thead>
                             <tbody id="employeeReportsTable">
