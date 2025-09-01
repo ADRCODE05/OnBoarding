@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding - Plataforma de Educación Corporativa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .animate-slideInLeft {
+            animation: slideInLeft 0.3s ease-out forwards;
+        }
+
+        .chart-bar {
+            transition: height 1s ease-out;
+        }
+
+        .hover-scale:hover {
+            transform: scale(1.02);
+        }
+
+        .progress-ring {
+            transition: stroke-dasharray 1s ease-out;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="fixed inset-0 bg-white z-50 flex items-center justify-center">
+        <div class="text-center">
+            <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <h2 class="text-xl font-semibold text-gray-900">Cargando Onboarding...</h2>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="mainApp" class="hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar"
+            class="fixed left-0 top-0 h-full w-64 bg-white shadow-lg z-30 transform -translate-x-full lg:translate-x-0 transition-transform duration-300">
+            <div class="flex items-center justify-between h-16 px-6 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                        <i data-lucide="book-open" class="h-5 w-5 text-white"></i>
+                    </div>
+                    <span class="text-xl font-bold text-gray-900">Onboarding</span>
+                </div>
+                <button id="closeSidebar" class="lg:hidden text-gray-500 hover:text-gray-700">
+                    <i data-lucide="x" class="h-5 w-5"></i>
+                </button>
+            </div>
+
+            <nav class="mt-8">
+                <!--ENLANCE DE DASHBOARD-->
+                <a href="dashboard.html"
+                    class="role-Admin hidden nav-item w-full flex items-center px-6 py-3 text-left text-sm font-medium transition-colors duration-150 text-blue-600 bg-blue-50 border-r-2 border-blue-600 hover:bg-gray-50">
+                    <i data-lucide="chart-no-axes-combined" class="mr-3 h-5 w-5"></i>
+                    Dashboard
+                </a>
+                <!--ENLANCE DE COURSE-->
+                <a href="courses.html"
+                    class="role-Admin hidden nav-item w-full flex items-center px-6 py-3 text-left text-sm font-medium transition-colors duration-150 text-gray-700 hover:text-blue-600 hover:bg-gray-50">
+                    <i data-lucide="book-open" class="mr-3 h-5 w-5"></i>
+                    Courses
+                </a>
+                <!--ENLANCE DE REPORTS-->
+                <a href="reports.html"
+                    class="role-Admin hidden nav-item w-full flex items-center px-6 py-3 text-left text-sm font-medium transition-colors duration-150 text-gray-700 hover:text-blue-600 hover:bg-gray-50">
+                    <i data-lucide="pie-chart" class="mr-3 h-5 w-5"></i>
+                    Reports
+                </a>
+                <!--ENLANCE DE DOCUMENTS-->
+                <a href="documents.html"
+                    class="role-Admin hidden nav-item w-full flex items-center px-6 py-3 text-left text-sm font-medium transition-colors duration-150 text-gray-700 hover:text-blue-600 hover:bg-gray-50">
+                    <i data-lucide="folder" class="mr-3 h-5 w-5"></i>
+                    Documents
+                </a>
+                <!--ENLANCE DE PROFILE-->
+                <a href="profile.html" 
+                    class="role-Admin hidden nav-item w-full flex items-center px-6 py-3 text-left text-sm font-medium transition-colors duration-150 text-gray-700 hover:text-blue-600 hover:bg-gray-50">
+                    <i data-lucide="user" class="mr-3 h-5 w-5"></i>
+                    Profile
+                </a>
+
+                <!--ENLANCE DE EMPLOYEES-->
+                <a href="dashboard.html"
+                    class="role-Empleado hidden nav-item w-full flex items-center px-6 py-3 text-left text-sm font-medium transition-colors duration-150 text-blue-600 bg-blue-50 border-r-2 border-blue-600 hover:bg-gray-50">
+                    <i data-lucide="chart-no-axes-combined" class="mr-3 h-5 w-5"></i>
+                    Dashboard
+                </a>
+                <!--ENLANCE DE COURSE-->
+                <a href="courses.html"
+                    class="role-Empleado hidden nav-item w-full flex items-center px-6 py-3 text-left text-sm font-medium transition-colors duration-150 text-gray-700 hover:text-blue-600 hover:bg-gray-50">
+                    <i data-lucide="book-open" class="mr-3 h-5 w-5"></i>
+                    Courses
+                </a>
+                <!--ENLANCE DE DOCUMENTS-->
+                <a href="documents.html"
+                    class="role-Empleado hidden nav-item w-full flex items-center px-6 py-3 text-left text-sm font-medium transition-colors duration-150 text-gray-700 hover:text-blue-600 hover:bg-gray-50">
+                    <i data-lucide="folder" class="mr-3 h-5 w-5"></i>
+                    Documents
+                </a>
+                <!--ENLANCE DE PROFILE-->
+                <a href="profile.html"
+                    class="role-Empleado hidden nav-item w-full flex items-center px-6 py-3 text-left text-sm font-medium transition-colors duration-150 text-gray-700 hover:text-blue-600 hover:bg-gray-50">
+                    <i data-lucide="user" class="mr-3 h-5 w-5"></i>
+                    Profile
+                </a>
+
+                <!--ENLACES DE RECURSO HUMANO-->
+                <a href="dashboard.html"
+                    class="role-Talento-Humano hidden nav-item w-full flex items-center px-6 py-3 text-left text-sm font-medium transition-colors duration-150 text-blue-600 bg-blue-50 border-r-2 border-blue-600 hover:bg-gray-50">
+                    <i data-lucide="chart-no-axes-combined" class="mr-3 h-5 w-5"></i>
+                    Dashboard
+                </a>
+                <!--ENLANCE DE COURSE-->
+                <a href="courses.html"
+                    class="role-Talento-Humano hidden nav-item w-full flex items-center px-6 py-3 text-left text-sm font-medium transition-colors duration-150 text-gray-700 hover:text-blue-600 hover:bg-gray-50">
+                    <i data-lucide="book-open" class="mr-3 h-5 w-5"></i>
+                    Courses
+                </a>
+                <!--ENLANCE DE REPORTS-->
+                <a href="reports.html"
+                    class="role-Talento-Humano hidden nav-item w-full flex items-center px-6 py-3 text-left text-sm font-medium transition-colors duration-150 text-gray-700 hover:text-blue-600 hover:bg-gray-50">
+                    <i data-lucide="pie-chart" class="mr-3 h-5 w-5"></i>
+                    Reports
+                </a>
+                <!--ENLANCE DE DOCUMENTS-->
+                <a href="documents.html"
+                    class="role-Talento-Humano hidden nav-item w-full flex items-center px-6 py-3 text-left text-sm font-medium transition-colors duration-150 text-gray-700 hover:text-blue-600 hover:bg-gray-50">
+                    <i data-lucide="folder" class="mr-3 h-5 w-5"></i>
+                    Documents
+                </a>
+                <!--ENLANCE DE PROFILE-->
+                <a href="profile.html"
+                    class="role-Talento-Humano hidden nav-item w-full flex items-center px-6 py-3 text-left text-sm font-medium transition-colors duration-150 text-gray-700 hover:text-blue-600 hover:bg-gray-50">
+                    <i data-lucide="user" class="mr-3 h-5 w-5"></i>
+                    Profile
+                </a>
+            </nav>
+
+            <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200">
+                <div class="flex items-center space-x-3">
+                    <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150"
+                        alt="Usuario" class="h-8 w-8 rounded-full object-cover">
+                    <div class="flex-1 min-w-0">
+                        <p class="userFullName" class="text-sm font-medium text-gray-900 truncate">
+                            María González
+                        </p>
+                        <p class="roleFullName" class="text-xs text-gray-500 truncate">
+                            Coordinadora RRHH
+                        </p>
+                    </div>
+                    <button id="logoutBtn" class="text-gray-400 hover:text-gray-600">
+                        <i data-lucide="log-out" class="h-4 w-4"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+
+        <!-- Overlay for mobile -->
+        <div id="sidebarOverlay" class="lg:hidden fixed inset-0 z-20 bg-black bg-opacity-50 hidden"></div>
+
+        <!-- Main Content -->
+        <div class="lg:ml-64">
+            <!-- Header -->
+            <header class="bg-white shadow-sm border-b border-gray-200">
+                <div class="flex items-center justify-between h-16 px-6">
+                    <div class="flex items-center space-x-4">
+                        <button id="openSidebar" class="lg:hidden text-gray-500 hover:text-gray-700">
+                            <i data-lucide="menu" class="h-5 w-5"></i>
+                        </button>
+                        <div class="relative">
+                            <i data-lucide="search"
+                                class="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400"></i>
+                            <input type="text" placeholder="Buscar cursos, empleados..."
+                                class="pl-10 pr-4 py-2 w-80 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-4">
+                        <button class="relative p-2 text-gray-400 hover:text-gray-600">
+                            <i data-lucide="bell" class="h-5 w-5"></i>
+                            <span
+                                class="absolute -top-1 -right-1 h-4 w-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
+                        </button>
+
+                        <div class="flex items-center space-x-3">
+                            <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150"
+                                alt="Usuario" class="h-8 w-8 rounded-full object-cover">
+                            <div class="hidden sm:block">
+                                <p class="userFullName" class="text-sm font-medium text-gray-900">María González</p>
+                                <p class="roleFullName" class="text-xs text-gray-500">Recursos Humanos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+
+            <!-- Knowledge Base Content -->
+            <div id="documentsContent" class="section-content hidden">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900 mb-2">Base de Conocimiento</h1>
+                        <p class="text-gray-600">Manual digital centralizado con políticas, procesos y documentación
+                        </p>
+                    </div>
+                    <button id="addDocumentBtn"
+                        class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
+                        <i data-lucide="plus" class="h-5 w-5"></i>
+                        <span>Agregar Documento</span>
+                    </button>
+                </div>
+
+                <!-- Knowledge Search -->
+                <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                    <div class="relative">
+                        <i data-lucide="search"
+                            class="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400"></i>
+                        <input id="knowledgeSearch" type="text" placeholder="Buscar en políticas, procesos, manuales..."
+                            class="pl-12 pr-4 py-4 w-full text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                </div>
+
+                <!-- Knowledge Categories -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-xl shadow-sm p-6 hover-scale transition-transform">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <i data-lucide="shield-check" class="h-8 w-8 text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900">Políticas Internas</h3>
+                                <p class="text-sm text-gray-600">15 documentos</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Normas, reglamentos y políticas corporativas</p>
+                        <button
+                            class="w-full bg-blue-50 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-100 transition-colors">
+                            Ver Documentos
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm p-6 hover-scale transition-transform">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="bg-green-50 p-3 rounded-lg">
+                                <i data-lucide="workflow" class="h-8 w-8 text-green-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900">Procesos</h3>
+                                <p class="text-sm text-gray-600">23 procesos</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Procedimientos operativos y flujos de trabajo</p>
+                        <button
+                            class="w-full bg-green-50 text-green-600 py-2 px-4 rounded-lg hover:bg-green-100 transition-colors">
+                            Ver Procesos
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm p-6 hover-scale transition-transform">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="bg-purple-50 p-3 rounded-lg">
+                                <i data-lucide="book" class="h-8 w-8 text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900">Manuales</h3>
+                                <p class="text-sm text-gray-600">8 manuales</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Guías detalladas y manuales de usuario</p>
+                        <button
+                            class="w-full bg-purple-50 text-purple-600 py-2 px-4 rounded-lg hover:bg-purple-100 transition-colors">
+                            Ver Manuales
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm p-6 hover-scale transition-transform">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="bg-orange-50 p-3 rounded-lg">
+                                <i data-lucide="file-text" class="h-8 w-8 text-orange-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900">Formularios</h3>
+                                <p class="text-sm text-gray-600">12 formularios</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Plantillas y formularios corporativos</p>
+                        <button
+                            class="w-full bg-orange-50 text-orange-600 py-2 px-4 rounded-lg hover:bg-orange-100 transition-colors">
+                            Ver Formularios
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm p-6 hover-scale transition-transform">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="bg-red-50 p-3 rounded-lg">
+                                <i data-lucide="alert-triangle" class="h-8 w-8 text-red-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900">Emergencias</h3>
+                                <p class="text-sm text-gray-600">6 protocolos</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Protocolos de emergencia y seguridad</p>
+                        <button
+                            class="w-full bg-red-50 text-red-600 py-2 px-4 rounded-lg hover:bg-red-100 transition-colors">
+                            Ver Protocolos
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm p-6 hover-scale transition-transform">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="bg-yellow-50 p-3 rounded-lg">
+                                <i data-lucide="help-circle" class="h-8 w-8 text-yellow-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900">FAQ</h3>
+                                <p class="text-sm text-gray-600">45 preguntas</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">Preguntas frecuentes y respuestas</p>
+                        <button
+                            class="w-full bg-yellow-50 text-yellow-600 py-2 px-4 rounded-lg hover:bg-yellow-100 transition-colors">
+                            Ver FAQ
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Documents -->
+                <div class="mt-8 bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+                        <i data-lucide="clock" class="h-5 w-5 text-blue-500 mr-2"></i>
+                        Documentos Recientes
+                    </h3>
+
+                    <div class="space-y-4">
+                        <div
+                            class="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50">
+                            <div class="flex items-center space-x-4">
+                                <div class="bg-blue-50 p-2 rounded-lg">
+                                    <i data-lucide="file-text" class="h-5 w-5 text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-900">Manual de Inducción 2025</h4>
+                                    <p class="text-sm text-gray-500">Actualizado hace 2 días • Políticas Internas
+                                    </p>
+                                </div>
+                            </div>
+                            <button class="text-blue-600 hover:text-blue-800">
+                                <i data-lucide="external-link" class="h-4 w-4"></i>
+                            </button>
+                        </div>
+
+                        <div
+                            class="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50">
+                            <div class="flex items-center space-x-4">
+                                <div class="bg-green-50 p-2 rounded-lg">
+                                    <i data-lucide="workflow" class="h-5 w-5 text-green-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-900">Proceso de Evaluación de Desempeño</h4>
+                                    <p class="text-sm text-gray-500">Actualizado hace 1 semana • Procesos</p>
+                                </div>
+                            </div>
+                            <button class="text-blue-600 hover:text-blue-800">
+                                <i data-lucide="external-link" class="h-4 w-4"></i>
+                            </button>
+                        </div>
+
+                        <div
+                            class="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50">
+                            <div class="flex items-center space-x-4">
+                                <div class="bg-red-50 p-2 rounded-lg">
+                                    <i data-lucide="alert-triangle" class="h-5 w-5 text-red-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-900">Protocolo COVID-19 Actualizado</h4>
+                                    <p class="text-sm text-gray-500">Actualizado hace 3 días • Emergencias</p>
+                                </div>
+                            </div>
+                            <button class="text-blue-600 hover:text-blue-800">
+                                <i data-lucide="external-link" class="h-4 w-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+            <script type="module" src="../js/ui.js"></script>
+            <script type="module" src="../js/auth.js"></script>
+            <script type="module" src="../js/sidebar.js"></script>
+            <script type="module" src="../js/documents.js"></script>
+            
+</body>
+
+</html>
