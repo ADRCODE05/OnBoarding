@@ -120,17 +120,19 @@ The database is defined in `docs/database.sql` and includes the following main t
 - **Custom courses** (personalized_courses)
 - **Registration records** (registrations)
 
-### 📊 Relational Diagram
 
-👉 [Link to the diagram] [Relational](./docs/MODELO_RELACIONAL.png)
+## 📄 Relational Model
+![Database Model](./docs/MODELO_RELACIONAL.png)  
 
-### 🗺 Navigation Map
+---
 
-👉 [Link to navigation map](./docs/diagrama-navegacion-p.-m..png)
+## 🗺 Navigation Map
+![Database Model](./docs/diagrama-navegacion-p.-m..png)  
 
-### ⚙️ Component Diagram
+---
 
-👉 [Link to component diagram](./docs/image.png)
+## ⚙️ Component Diagram
+![Database Model](./docs/image.png)  
 
 ---
 
