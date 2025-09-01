@@ -126,8 +126,8 @@ export const viewsPutEmployeesByIdentification = async (req, res) => {
 
 export const viewsDeleteEmployees = async (req, res) => {
     try {
-        const { id } = req.params
-        const doAwayEmployee = await deleteEmployee(id) 
+        const { employee_id } = req.params
+        const doAwayEmployee = await deleteEmployee(employee_id) 
         res.status(200).json(doAwayEmployee);
     } catch (error) {
         console.error(error.message);

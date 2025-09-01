@@ -3,17 +3,39 @@ import { pool } from '../../db/db.js'
 
 // GET
 export const getUsersEmailLogin = async (email) => {
-    const query = `
+    const query =( `
         SELECT u.user_id, u.email, u.password, u.role_id, r.name_role
         FROM users u
         INNER JOIN roles r ON u.role_id = r.role_id
         WHERE u.email = $1
-    `;
+    `);
     const values = [email];
     const result = await pool.query(query, values);
     return result.rows[0];
 };
 
+
+
+export const getMe = async (userId) => {
+    const query = (`
+        SELECT u.user_id, u.email, u.role_id, r.name_role, u.username
+        FROM users u
+        INNER JOIN roles r ON u.role_id = r.role_id
+        WHERE u.user_id = $1
+    `);
+    const values = [userId]
+    const result = await pool.query(query, values)
+    return result.rows[0]
+}
+
+
+export const getProfile = async (idUser) => {
+    const query = `SELECT user_id, username, email, role_id FROM users
+                WHERE user_id = $1`
+    const values = [idUser]
+    const result = await pool.query(query, values)
+    return result.rows[0]
+};
 
 
 export const getUsers = async () => {

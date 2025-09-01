@@ -8,11 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     switch(role) {  
         case 1:
-            document.querySelectorAll(".role-Admin")
+            document.querySelectorAll(".role-Talento-Humano")
             .forEach(el => el.classList.remove("hidden"));
             break;
         case 2:
-            document.querySelectorAll(".role-Talento-Humano")
+            document.querySelectorAll(".role-Admin")
             .forEach(el => el.classList.remove("hidden"));
             break;
         case 3:

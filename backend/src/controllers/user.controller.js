@@ -10,8 +10,43 @@ import {
     deleteByEmail,
     loginUser,
     updateUserEmail,
-    createUserAdmin
+    createUserAdmin,
+    DataMe,
+    profileData
 } from "../services/userService.js";
+
+
+
+export const me = async (req, res) => {
+    try {
+        const userId = req.user.user_id
+        const data = await DataMe(userId)
+        res.status(200).json(data)
+    } catch (error) {
+        console.error(error.message)
+        res.status(404).json({
+            message: 'No se pudo obtener datos del usuario',
+            error: error.message
+        })
+    }
+}
+
+export const profile = async (req,  res) => {
+    try {
+        const idUser = req.user.user_id
+        const data = await profileData(idUser)
+        res.status(200).json(data)
+    } catch (error) {
+        console.error(error.message);
+        res.status(404).json({
+            message: 'No se pudo obtener id',
+            error: error.message
+        })
+    }
+}
+
+
+
 
 export const login = async (req, res) => {
     try {

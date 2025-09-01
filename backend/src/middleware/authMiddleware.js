@@ -1,7 +1,7 @@
 import { validarToken } from "../utils/jwt.js";
 
 export const authMiddleware =  (req, res, next) => {
-    const AuthHeaders = req.headers['authorization']
+    const AuthHeaders = req.headers['authorization']    
     if(!AuthHeaders) {
         return res.status(401).json({
             error: 'Token requerido'

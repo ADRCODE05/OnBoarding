@@ -1,4 +1,4 @@
-import { getToken, logout } from "./auth.js";
+import { API, getToken, logout } from "./auth.js";
 import { showApp } from "./ui.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -28,3 +28,27 @@ document.addEventListener("DOMContentLoaded", async () => {
         coursesModule.loadCourses?.();
     }
 });
+
+
+
+const loadUserData = async () => {
+    try {
+        const res = await fetch(API('/me'), {
+            headers: {
+                Authorization: `Bearer ${getToken()}`
+            }
+        })
+        if(!res.ok) {
+            throw new Error('No se pudo obtener el usuario')
+        }
+
+        const user = await res.json()
+
+        document.querySelectorAll('.userFullName').forEach(el => el.textContent = user.username || "Usuario")  
+        document.querySelectorAll('.roleFullName').forEach(el => el.textContent = user.role || "Desconocido")  
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadUserData)

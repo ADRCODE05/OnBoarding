@@ -2,8 +2,23 @@ import {
         allRegister,
         registerById,
         newRegister,
-        eliminateRegister
+        eliminateRegister,
+        allTableEmployees
 } from "../services/registrationsService.js";
+
+
+export const employeeTable = async (req, res) => {
+    try {
+        const data = await allTableEmployees()
+        res.status(200).json(data)
+    } catch (error) {
+        console.error(error.message);
+        res.status(404).json({
+            message: 'No se pudo obtener empleados por tabla',
+            error: error.message
+        })
+    }
+}
 
 
 export const registrationAll = async (req, res) => {

@@ -17,7 +17,9 @@ import {
         showDeleteUserId,
         showDeleteUserEmail,
         login,
-        showCreateUserAdmin
+        showCreateUserAdmin,
+        me,
+        profile
 } from "../controllers/user.controller.js";
 
 
@@ -62,6 +64,7 @@ import {
 
 // Registration 
 import { 
+        employeeTable,
         registrationAll, 
         registrationById, 
         registrationCreate, 
@@ -80,6 +83,10 @@ router.post('/login', login)
 
 // brings all users
 router.get('/users', showGetAllUser)
+
+router.get('/profile', authMiddleware, profile)
+
+router.get('/me', authMiddleware,  me)
 
 router.get('/users/id/:user_id', showGetUserId)
 
@@ -102,6 +109,8 @@ router.delete('/users/delete/email/:email', showDeleteUserEmail)
 
 // rutas de empleados
 router.get('/employees', viewsAllEmployee)
+
+router.get('/reports', authMiddleware, employeeTable)
 
 router.get('/employees/id/:employee_id', viewsEmployeeById)
 

@@ -10,7 +10,9 @@ import {
     deleteUserId,
     deleteUserEmail,
     putUserEmail,
-    getUsersEmailLogin
+    getUsersEmailLogin,
+    getMe,
+    getProfile
 } from "../models/userQueries.js";
 
 
@@ -20,19 +22,51 @@ export const loginUser = async (email, password) => {
     if(!user) {
         throw new Error('Credenciales invalidas')
     }
-
+    
     const data = await bcrypt.compare(password, user.password)
+    
     if(!data) {
         throw new Error('Credenciales invalidas')
     }
     const token = crearToken({
-        id: user.user_user_id,
+        user_id: user.user_id,
         email: user.email,
         id_role: user.role_id,
-        name_role: user.name_role
+        role: user.name_role    
     })
     delete user.password
     return  { token, user }
+}
+
+
+export const profileData = async (idUser) => {
+    if(!idUser) {
+        throw new Error('El campo del id esta vacio')
+    }
+
+    const data = await getProfile(idUser)
+
+    if(!data) {
+        throw new Error('El usuario no existe')
+    }
+
+    return data
+}
+
+
+export const DataMe = async (userId) => {
+    if(!userId) {
+        throw new Error('No se pudo obtener el dato necesario');
+        
+    }
+    const data = await getMe(userId)
+
+    if(!data) {
+        throw new Error('el dato no existe')
+    }
+
+    return data
+
 }
 
 

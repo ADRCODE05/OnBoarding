@@ -18,6 +18,14 @@ export function showApp(isLogged) {
   }
 }
 
+
+export function showSection(id) {
+  const section = document.getElementById(id);
+  if (section) {
+    section.classList.remove("hidden");
+  }
+}
+
 // Sidebar (solo abrir/cerrar)
 function handleSidebar() {
   $("#openSidebar")?.addEventListener("click", () => {

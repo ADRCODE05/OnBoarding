@@ -2,17 +2,17 @@ import jwt from 'jsonwebtoken';
 
 export const crearToken = (user) => {
     return jwt.sign({ 
-        id: user.user_id,
+        user_id: user.user_id,
         email: user.email,
         id_role: user.role_id,
-        name_role: user.name_role
-        }, process.env.JWT_SECRET, {expiresIn: '24h'})
+        role: user.name_role
+        }, process.env.JWT_SECRET, {expiresIn: '20d'})
 }
 
 
 export const validarToken = (token) => {
     try {
-        return jwt.verify(token, secretKey)
+        return jwt.verify(token, process.env.JWT_SECRET)
         
     } catch (error) {
         throw new Error('Token inválido o expirado')

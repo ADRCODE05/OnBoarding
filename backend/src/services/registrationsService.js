@@ -2,9 +2,15 @@ import {
         getAllRegister,
         getRegisterById,
         postRegister,
-        deleteRegister
+        deleteRegister,
+        getEmployeeTable
 } from "../models/registrationsQueries.js";
 
+
+export const allTableEmployees = async () => {
+    const data = await getEmployeeTable()
+    return data
+}
 
 
 export const allRegister = async () => {
@@ -31,8 +37,8 @@ export const registerById = async (registration_id) => {
 
 
 export const newRegister = async (employee_id, coursep_id, course_id) => {
-    employee_id = Number(employee_id);
-    course_id = Number(course_id);
+    employee_id = parseInt(employee_id);
+    course_id = parseInt(course_id);
 
     if(!employee_id || !coursep_id || !course_id) {
         throw new Error('Los campos son obligatorios')
@@ -45,7 +51,7 @@ export const newRegister = async (employee_id, coursep_id, course_id) => {
     const data = await postRegister(employee_id, coursep_id, course_id)
 
     if(!data) {
-        throw new Error('No se puedo crear el nuevo registro')
+        throw new Error('No se pudo crear el nuevo registro')
     }
 
     return data
@@ -53,7 +59,7 @@ export const newRegister = async (employee_id, coursep_id, course_id) => {
 
 
 export const eliminateRegister = async (registration_id) => {
-    registration_id = Number(registration_id)
+    registration_id = parseInt(registration_id)
 
 
     if(!registration_id) {
@@ -67,7 +73,7 @@ export const eliminateRegister = async (registration_id) => {
     const data = await deleteRegister(registration_id)
 
     if(!data) {
-        throw new Error('No se pudo borrar el registro')
+        throw new Error('No existe el registro')
     }
 
     return data
