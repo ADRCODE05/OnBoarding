@@ -6,10 +6,7 @@ const $$ = (sel) => document.querySelectorAll(sel);
 
 function renderProfile(user) {
     if (!user) return;
-
-    $$(".userFullName").forEach(el => el.textContent = user.username || "Usuario") ;
-    $$(".roleFullName").forEach(el => el.textContent = user.role || "Desconocido"); 
-
+    
     $("#profileName").textContent = user.username || "Nombre";
     $("#profileRole").textContent = user.role || "Cargo";
     $("#profileEmail").textContent = user.email || "email@ejemplo.com";
@@ -19,10 +16,26 @@ function renderProfile(user) {
     $("#profileCargoInput").value = user.role || "";
 }
 
+async function loadBasicUser() {
+    try {
+        const res = await fetch(API('/me'), {
+            headers: { Authorization: `Bearer ${getToken()}` }
+        });
+        if (!res.ok) throw new Error("No se pudo obtener el usuario básico");
+
+        const user = await res.json();
+        $$(".userFullName").forEach(el => el.textContent = user.username || "Usuario");
+        $$(".roleFullName").forEach(el => el.textContent = user.role || "Desconocido");
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+
+
+
 async function loadProfileData() {
     const token = getToken();
     if (!token) return;
-
     try {
         const res = await fetch(API('/profile'), {
             headers: { Authorization: `Bearer ${token}` }
@@ -47,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (isLogged) {
         loadProfileData();
+        loadBasicUser()
     } else {
         window.location.href = "../../index.html";
     }

@@ -30,8 +30,8 @@ export const getMe = async (userId) => {
 
 
 export const getProfile = async (idUser) => {
-    const query = `SELECT user_id, username, email, role_id FROM users
-                WHERE user_id = $1`
+    const query = (`SELECT user_id, username, email, role_id FROM users
+                WHERE user_id = $1`)
     const values = [idUser]
     const result = await pool.query(query, values)
     return result.rows[0]
