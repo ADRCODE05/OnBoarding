@@ -13,7 +13,7 @@ The platform adapts to the **user role**, displaying specific modules and featur
 ## 🛠 Technologies Used
 
 - **Node.js + Express** → Backend and REST API
-- **MySQL** → Relational Database
+- **PostgreSQL** → Relational Database
 - **HTML, JavaScript, Tailwind CSS** → Frontend
 - **JWT** → Authentication and Authorization
 - **Swagger** → API Documentation
