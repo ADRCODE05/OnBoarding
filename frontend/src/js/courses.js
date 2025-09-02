@@ -1,4 +1,4 @@
-import { saveToken, logout, API } from './auth.js';
+import { getToken, API } from "./auth.js";
 
 import { showApp, showSection } from "./ui.js";
 
