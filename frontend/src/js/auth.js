@@ -9,7 +9,8 @@ function getRole() { return localStorage.getItem('role'); }
 function logout() { 
   localStorage.removeItem('token'); 
   localStorage.removeItem('role')
-  window.location.href = '../../index.html';
+  window.location.href = "/dashboard"
+';
 }
 
 export { saveToken, getToken, saveRole, getRole, logout, API };
