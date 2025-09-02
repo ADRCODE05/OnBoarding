@@ -1,4 +1,4 @@
-import { API, getToken, logout } from "./js/auth.js";
+import { API, getToken, logout } from "./auth.js";
 import { showApp } from "./ui.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
