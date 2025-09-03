@@ -2,6 +2,11 @@
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
+// Obtiene el rol del usuario desde localStorage (ajusta según tu lógica)
+function getUserRole() {
+  return localStorage.getItem('role') || 'Admin';
+}
+
 export function showApp(isLogged) {
   const loading = $("#loadingScreen");
   const login = $("#loginScreen");
@@ -45,19 +50,33 @@ function handleSidebar() {
   });
 }
 
-// MARCAR EL MÓDULO ACTIVO EN EL SIDEBAR
+// MARCAR EL MÓDULO ACTIVO EN EL SIDEBAR SEGÚN ROL
 export function setActiveModule(moduleName) {
-  // Limpia todos los nav-items del sidebar
+  const role = getUserRole();
+  let activeClasses, inactiveClasses;
+
+  if (role === 'Admin') {
+    activeClasses = ["text-blue-600", "bg-blue-50", "border-r-2", "border-blue-600"];
+    inactiveClasses = ["text-gray-700"];
+  } else if (role === 'Employee') {
+    activeClasses = ["text-green-600", "bg-green-50", "border-r-2", "border-green-600"];
+    inactiveClasses = ["text-gray-700"];
+  } else {
+    // Otros roles o default
+    activeClasses = ["text-gray-900", "bg-gray-50", "border-r-2", "border-gray-600"];
+    inactiveClasses = ["text-gray-700"];
+  }
+
   $$("#sidebar .nav-item").forEach(link => {
-    link.classList.remove("text-blue-600", "bg-blue-50", "border-r-2", "border-blue-600");
-    link.classList.add("text-gray-700");
+    link.classList.remove(...activeClasses);
+    link.classList.add(...inactiveClasses);
   });
 
   // Busca el link correspondiente
   const activeLink = $(`#sidebar .nav-item[href*="${moduleName.replace("Content","").replace(".html","")}"]`);
   if (activeLink) {
-    activeLink.classList.add("text-blue-600", "bg-blue-50", "border-r-2", "border-blue-600");
-    activeLink.classList.remove("text-gray-700");
+    activeLink.classList.add(...activeClasses);
+    activeLink.classList.remove(...inactiveClasses);
   }
 }
 
@@ -66,18 +85,29 @@ document.addEventListener("DOMContentLoaded", () => {
   try { lucide?.createIcons(); } catch {}
   handleSidebar();
 
-  // Marca el módulo activo en el sidebar según la url actual
+  // Marca el módulo activo en el sidebar según la url actual y el rol
   const path = window.location.pathname.split("/").pop();
+  const role = getUserRole();
+
+  let activeClasses, inactiveClasses;
+  if (role === 'Admin') {
+    activeClasses = ["text-blue-600", "bg-blue-50", "border-r-2", "border-blue-600"];
+    inactiveClasses = ["text-gray-700"];
+  } else if (role === 'Employee') {
+    activeClasses = ["text-green-600", "bg-green-50", "border-r-2", "border-green-600"];
+    inactiveClasses = ["text-gray-700"];
+  } else {
+    activeClasses = ["text-gray-900", "bg-gray-50", "border-r-2", "border-gray-600"];
+    inactiveClasses = ["text-gray-700"];
+  }
 
   document.querySelectorAll("#sidebar .nav-item").forEach(link => {
     if (link.getAttribute("href") === path) {
-      // Si es el link de la página actual, pinta como activo
-      link.classList.add("text-blue-600", "bg-blue-50", "border-r-2", "border-blue-600");
-      link.classList.remove("text-gray-700");
+      link.classList.add(...activeClasses);
+      link.classList.remove(...inactiveClasses);
     } else {
-      // Los demás quedan desactivados
-      link.classList.remove("text-blue-600", "bg-blue-50", "border-r-2", "border-blue-600");
-      link.classList.add("text-gray-700");
+      link.classList.remove(...activeClasses);
+      link.classList.add(...inactiveClasses);
     }
   });
 });
