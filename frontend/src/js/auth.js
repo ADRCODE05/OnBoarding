@@ -9,7 +9,7 @@ function getRole() { return localStorage.getItem('role'); }
 function logout() { 
   localStorage.removeItem('token'); 
   localStorage.removeItem('role')
-  window.location.href = "/dashboard"
+  window.location.href = "/index"
 ;
 }
 
