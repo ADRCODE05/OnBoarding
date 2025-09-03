@@ -2,7 +2,7 @@
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
-// UI state based on token
+
 export function showApp(isLogged) {
   const loading = $("#loadingScreen");
   const login = $("#loginScreen");
@@ -18,12 +18,16 @@ export function showApp(isLogged) {
   }
 }
 
-
 export function showSection(id) {
+  // Oculta todas las secciones
+  $$(".section-content").forEach(section => section.classList.add("hidden"));
+  // Muestra la sección seleccionada
   const section = document.getElementById(id);
   if (section) {
     section.classList.remove("hidden");
   }
+  // Actualiza el menú activo
+  setActiveModule(id);
 }
 
 // Sidebar (solo abrir/cerrar)
@@ -42,7 +46,41 @@ function handleSidebar() {
   });
 }
 
+// MARCAR EL MÓDULO ACTIVO EN EL SIDEBAR
+export function setActiveModule(moduleName) {
+  // Limpia todos los nav-items del sidebar
+  $$("#sidebar .nav-item").forEach(link => {
+    link.classList.remove("text-blue-600", "bg-blue-50", "border-r-2", "border-blue-600");
+    link.classList.add("text-gray-700");
+  });
+
+  // Busca el link correspondiente
+  const activeLink = $(`#sidebar .nav-item[href*="${moduleName.replace("Content","").replace(".html","")}"]`);
+  if (activeLink) {
+    activeLink.classList.add("text-blue-600", "bg-blue-50", "border-r-2", "border-blue-600");
+    activeLink.classList.remove("text-gray-700");
+  }
+}
+
+// INICIALIZACIÓN
 document.addEventListener("DOMContentLoaded", () => {
   try { lucide?.createIcons(); } catch {}
   handleSidebar();
+
+  // Color del módulo según la sección visible al cargar
+  // Busca el id de la sección visible y marca el menú
+  const visibleSection = $$(".section-content").find(sec => !sec.classList.contains("hidden"));
+  if (visibleSection) setActiveModule(visibleSection.id);
+
+  // Marca del menú según la URL
+  const path = window.location.pathname.split("/").pop();
+  $$("#sidebar .nav-item").forEach(link => {
+    if (link.getAttribute("href") === path) {
+      link.classList.add("text-blue-600", "bg-blue-50", "border-r-2", "border-blue-600");
+      link.classList.remove("text-gray-700");
+    } else {
+      link.classList.remove("text-blue-600", "bg-blue-50", "border-r-2", "border-blue-600");
+      link.classList.add("text-gray-700");
+    }
+  });
 });
