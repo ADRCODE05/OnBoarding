@@ -1,0 +1,18 @@
+<!-- Modificación del sidebar para el rol Admin -->
+<ul>
+    <li class="{{ activeModule == 'dashboard' && userRole == 'Admin' ? 'text-blue-600 bg-blue-50 border-r-2 border-blue-600' : '' }}">
+        <a href="/dashboard">Dashboard</a>
+    </li>
+    <li class="{{ activeModule == 'courses' && userRole == 'Admin' ? 'text-blue-600 bg-blue-50 border-r-2 border-blue-600' : '' }}">
+        <a href="/courses">Courses</a>
+    </li>
+    <li class="{{ activeModule == 'reports' && userRole == 'Admin' ? 'text-blue-600 bg-blue-50 border-r-2 border-blue-600' : '' }}">
+        <a href="/reports">Reports</a>
+    </li>
+    <li class="{{ activeModule == 'documents' && userRole == 'Admin' ? 'text-blue-600 bg-blue-50 border-r-2 border-blue-600' : '' }}">
+        <a href="/documents">Documents</a>
+    </li>
+    <li class="{{ activeModule == 'profile' && userRole == 'Admin' ? 'text-blue-600 bg-blue-50 border-r-2 border-blue-600' : '' }}">
+        <a href="/profile">Profile</a>
+    </li>
+</ul>
