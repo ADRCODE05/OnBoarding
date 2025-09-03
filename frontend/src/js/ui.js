@@ -2,7 +2,6 @@
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
-
 export function showApp(isLogged) {
   const loading = $("#loadingScreen");
   const login = $("#loginScreen");
@@ -67,12 +66,9 @@ document.addEventListener("DOMContentLoaded", () => {
   try { lucide?.createIcons(); } catch {}
   handleSidebar();
 
-// Marca el módulo activo en el sidebar según la url actual
-document.addEventListener("DOMContentLoaded", () => {
-  // Obtiene el archivo actual, ej: dashboard.html, courses.html, etc
+  // Marca el módulo activo en el sidebar según la url actual
   const path = window.location.pathname.split("/").pop();
 
-  // Recorre todos los enlaces del sidebar
   document.querySelectorAll("#sidebar .nav-item").forEach(link => {
     if (link.getAttribute("href") === path) {
       // Si es el link de la página actual, pinta como activo
