@@ -11,16 +11,32 @@
             "description": "Server local"
         }
     ],
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
     "paths": {
         "/api/v1/login": {
             "post": {
                 "summary": "login",
                 "tags": ["Public"],
+                "security": [],
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
+                                "type": "object",
                                 "properties": {
                                     "email": {
                                         "type": "string"
@@ -54,7 +70,39 @@
                 "responses": {
                     "200": {
                         "description": "list of users"
+                    },
+                    "404": {
+                        "description": "error getting users"
                     }
+                }
+            }
+        },
+        "/api/v1/profile": {
+            "get": {
+                "summary": "obtain more detailed user information",
+                "tags": ["users"],
+                "responses": {
+                    "200": {
+                        "description": "profile information"
+                    },
+                    "404": {
+                        "description": "Error getting profile information"
+                    }
+                }
+            }
+        },
+        "/api/v1/me": {
+            "get": {
+                "summary": "obtain user information",
+                "tags": ["users"],
+                "responses": {
+                    "200": {
+                        "description": "user data obtained correctly"
+                    },
+                    "404": {
+                        "description": "error getting user data"
+                    }
+
                 }
             }
         },
@@ -135,6 +183,50 @@
                 "responses": {
                     "201": {
                         "description": "user created successfully"
+                    },
+                    "404": {
+                        "description": "error creating user"
+                    }
+                }
+            }
+        },
+        "/api/v1/users/create/admin": {
+            "post": {
+                "summary": "create new user for admin",
+                "tags": ["users"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "role_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "username",
+                                    "email",
+                                    "password",
+                                    "role_id"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "user created for admin successfully"
                     },
                     "404": {
                         "description": "error creating user"

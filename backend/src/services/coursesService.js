@@ -53,7 +53,8 @@ export const serviceGetCourseTitle = async (title) => {
 
 
 export const servicePostCourse = async (title, description, duration, state_id, type_id) => {
-    duration = new Date()
+    const now = new Date()
+    duration = now.toTimeString().split(' ')[0];
     state_id = Number(state_id)
     type_id = Number(type_id)
 
