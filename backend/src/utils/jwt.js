@@ -8,9 +8,9 @@ export const crearToken = (user) => {
             id_role: user.role_id,
             role: user.name_role
         },
-        process.env.JWT_SECRET, // ✅ esto es obligatorio
+        process.env.JWT_SECRET,
         {
-            expiresIn: '1d' // ⏰ opcional, pero recomendado
+            expiresIn: '10d'
         }
     );
 };
@@ -24,4 +24,4 @@ export const validarToken = (token) => {
     } catch (error) {
         throw new Error('Token inválido o expirado')
     }
-}
+};

@@ -19,9 +19,6 @@ import {
 
 export const loginUser = async (email, password) => {
     const user = await getUsersEmailLogin(email.toLowerCase());
-    console.log(user);
-
-    
 
     if (!user) {
         throw new Error('Credenciales inválidas');
@@ -30,14 +27,10 @@ export const loginUser = async (email, password) => {
     let isPasswordValid = false;
 
     try {
-        isPasswordValid = user.password == password || await bcrypt.compare(password, user.password);
-        console.log(isPasswordValid);
+        isPasswordValid = user.password == password || await bcrypt.compare(password, user.password)
         
     } catch (err) {
-        // En caso de que la contraseña no esté hasheada (solo para desarrollo)
-        if (process.env.NODE_ENV === 'development') {
-            isPasswordValid = user.password === password;
-        }
+        alert(err.message)
     }
 
     if (!isPasswordValid) {
